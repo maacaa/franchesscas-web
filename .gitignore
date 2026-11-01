@@ -17,3 +17,6 @@ Thumbs.db
 
 # Carpeta generada al publicar en Netlify
 dist/
+
+# Enlace privado de la agenda (es la llave: no subir nunca)
+ENLACE-AGENDA-PRIVADO.txt

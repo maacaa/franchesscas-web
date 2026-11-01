@@ -121,16 +121,13 @@
   <p>Escribe la <b>Project URL</b> de tu proyecto en el archivo <code>supabase-config.js</code> y recarga esta página.</p>
 </div>
 
-<!-- LOGIN -->
-<section id="login" class="login" hidden>
-  <form class="login-card" id="login-form">
+<!-- SIN ENLACE: la agenda solo se abre con el enlace privado -->
+<section id="nokey" class="login" hidden>
+  <div class="login-card">
     <div class="logo">Franchessca's</div>
     <p>Agenda del salón</p>
-    <div class="field"><label for="l-email">Email</label><input type="email" id="l-email" autocomplete="username" required></div>
-    <div class="field"><label for="l-pass">Contraseña</label><input type="password" id="l-pass" autocomplete="current-password" required></div>
-    <button class="btn btn-dark" type="submit">Entrar</button>
-    <div class="msg" id="login-msg"></div>
-  </form>
+    <p id="nokey-msg">Abre la agenda desde tu enlace privado.</p>
+  </div>
 </section>
 
 <!-- APP -->
@@ -138,7 +135,6 @@
   <header>
     <div class="wrap bar">
       <div class="logo">Franchessca's<small>Agenda</small></div>
-      <button id="logout">Salir</button>
     </div>
   </header>
   <main class="wrap">
@@ -232,27 +228,31 @@
   if (!window.SUPABASE_URL || !window.supabase) { $('setup').hidden = false; throw new Error('Supabase sin configurar'); }
   const db = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_KEY);
 
-  /* ---------- Sesión ---------- */
-  const showApp = async session => {
-    if (!session) { $('login').hidden = false; $('app').hidden = true; return; }
-    const { data: isAdmin } = await db.rpc('is_admin');
-    if (!isAdmin) {
-      await db.auth.signOut();
-      $('login-msg').textContent = 'Esta cuenta no tiene acceso a la agenda.';
-      $('login').hidden = false; $('app').hidden = true; return;
-    }
-    $('login').hidden = true; $('app').hidden = false;
-    load();
+  /* ---------- Acceso con enlace privado (sin login) ---------- */
+  // El enlace es admin.html#k=CLAVE. La clave se guarda en este dispositivo y se quita de la barra de direcciones.
+  const KEY_STORE = 'fr-agenda-key';
+  const fromLink = new URLSearchParams(location.hash.slice(1)).get('k');
+  if (fromLink) {
+    try { localStorage.setItem(KEY_STORE, fromLink); } catch (e) {}
+    history.replaceState(null, '', location.pathname);
+  }
+  let KEY = fromLink;
+  if (!KEY) { try { KEY = localStorage.getItem(KEY_STORE); } catch (e) {} }
+  const noAccess = msg => {
+    $('nokey-msg').textContent = msg;
+    $('nokey').hidden = false; $('app').hidden = true;
   };
-  $('login-form').addEventListener('submit', async e => {
-    e.preventDefault();
-    $('login-msg').textContent = '';
-    const { data, error } = await db.auth.signInWithPassword({ email: $('l-email').value.trim(), password: $('l-pass').value });
-    if (error) { $('login-msg').textContent = 'Email o contraseña incorrectos.'; return; }
-    showApp(data.session);
-  });
-  $('logout').onclick = async () => { await db.auth.signOut(); location.reload(); };
-  db.auth.getSession().then(({ data }) => showApp(data.session));
+  // Llama a una función de la agenda; si la clave no vale, muestra el aviso
+  const call = async (fn, args = {}) => {
+    const res = await db.rpc(fn, { p_key: KEY, ...args });
+    if (res.error && res.error.code === '42501') {
+      try { localStorage.removeItem(KEY_STORE); } catch (e) {}
+      noAccess('Este enlace ya no es válido. Pide uno nuevo.');
+    }
+    return res;
+  };
+  if (!KEY) noAccess('Abre la agenda desde tu enlace privado.');
+  else { $('app').hidden = false; load(); }
 
   /* ---------- Agenda ---------- */
   let filter = 'pendiente', appts = [], blocks = [];
@@ -264,12 +264,9 @@
   });
 
   async function load() {
-    const [a, b] = await Promise.all([
-      db.from('appointments').select('*').gte('date', todayISO).order('date').order('time'),
-      db.from('blocked_slots').select('*').gte('date', todayISO).order('date').order('time', { nullsFirst: true })
-    ]);
-    if (a.error || b.error) { toast('No se pudo cargar la agenda.'); return; }
-    appts = a.data; blocks = b.data;
+    const { data, error } = await call('agenda_list', { p_from: todayISO });
+    if (error) { if (error.code !== '42501') toast('No se pudo cargar la agenda.'); return; }
+    appts = data.appointments; blocks = data.blocks;
     const in7 = iso(new Date(Date.now() + 7 * 864e5));
     $('s-pend').textContent = appts.filter(x => x.status === 'pendiente').length;
     $('s-today').textContent = appts.filter(x => x.date === todayISO && x.status !== 'cancelada').length;
@@ -320,7 +317,7 @@
     const b = e.target.closest('button[data-act]'); if (!b) return;
     const id = b.dataset.id, act = b.dataset.act;
     if (act === 'unblock') {
-      const { error } = await db.from('blocked_slots').delete().eq('id', id);
+      const { error } = await call('agenda_unblock', { p_id: id });
       toast(error ? 'No se pudo desbloquear.' : 'Horario desbloqueado.'); load(); return;
     }
     const r = appts.find(x => x.id === id);
@@ -328,14 +325,14 @@
     if (act === 'confirm') {
       const w = window.open(waLink(r.phone, `Hola ${r.name}, te confirmamos tu cita en Franchessca's para ${r.service} ${when}. Te esperamos en ${ADDRESS}. ¡Gracias!`), '_blank');
       b.disabled = true;
-      const { error } = await db.from('appointments').update({ status: 'confirmada' }).eq('id', id);
+      const { error } = await call('agenda_set_status', { p_id: id, p_status: 'confirmada' });
       if (error) { w && w.close(); toast('No se pudo confirmar.'); b.disabled = false; return; }
       toast('Cita confirmada. Envía el WhatsApp a la clienta.'); load();
     }
     if (act === 'cancel') {
       if (!confirm(`¿Cancelar la cita de ${r.name} ${when}?`)) return;
       const w = window.open(waLink(r.phone, `Hola ${r.name}, sentimos comunicarte que tenemos que anular tu cita en Franchessca's ${when}. Escríbenos y te buscamos otro hueco.`), '_blank');
-      const { error } = await db.from('appointments').update({ status: 'cancelada' }).eq('id', id);
+      const { error } = await call('agenda_set_status', { p_id: id, p_status: 'cancelada' });
       if (error) { w && w.close(); toast('No se pudo cancelar.'); return; }
       toast('Cita cancelada.'); load();
     }
@@ -368,11 +365,11 @@
     let res, w;
     if (editing) {
       w = window.open(waLink(editing.phone, `Hola ${editing.name}, te proponemos cambiar tu cita en Franchessca's al ${fmtDay(date)} a las ${time}. ¿Te viene bien? Responde a este mensaje para confirmarlo.`), '_blank');
-      res = await db.from('appointments').update({ date, time, status: 'confirmada' }).eq('id', editing.id);
+      res = await call('agenda_move', { p_id: editing.id, p_date: date, p_time: time });
     } else {
       if (!$('a-name').value.trim()) { $('appt-msg').textContent = 'Indica el nombre.'; return; }
-      res = await db.from('appointments').insert({ service: $('a-service').value, date, time, name: $('a-name').value.trim(),
-        phone: $('a-phone').value.trim() || '-', notes: $('a-notes').value.trim() || null, status: 'confirmada' });
+      res = await call('agenda_add', { p_service: $('a-service').value, p_date: date, p_time: time, p_name: $('a-name').value.trim(),
+        p_phone: $('a-phone').value.trim(), p_notes: $('a-notes').value.trim() });
     }
     if (res.error) {
       w && w.close();
@@ -394,7 +391,7 @@
   $('block-form').addEventListener('submit', async e => {
     if (e.submitter?.value !== 'ok') return;
     e.preventDefault();
-    const { error } = await db.from('blocked_slots').insert({ date: $('b-date').value, time: $('b-all').checked ? null : $('b-time').value, reason: $('b-reason').value.trim() || null });
+    const { error } = await call('agenda_block', { p_date: $('b-date').value, p_time: $('b-all').checked ? null : $('b-time').value, p_reason: $('b-reason').value.trim() });
     if (error) { $('block-msg').textContent = 'No se pudo bloquear.'; return; }
     $('dlg-block').close(); toast('Horario bloqueado.'); load();
   });
