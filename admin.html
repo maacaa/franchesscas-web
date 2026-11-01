@@ -121,14 +121,6 @@
   <p>Escribe la <b>Project URL</b> de tu proyecto en el archivo <code>supabase-config.js</code> y recarga esta página.</p>
 </div>
 
-<!-- SIN ENLACE: la agenda solo se abre con el enlace privado -->
-<section id="nokey" class="login" hidden>
-  <div class="login-card">
-    <div class="logo">Franchessca's</div>
-    <p>Agenda del salón</p>
-    <p id="nokey-msg">Abre la agenda desde tu enlace privado.</p>
-  </div>
-</section>
 
 <!-- APP -->
 <div id="app" hidden>
@@ -238,22 +230,20 @@
   }
   let KEY = fromLink;
   if (!KEY) { try { KEY = localStorage.getItem(KEY_STORE); } catch (e) {} }
-  const noAccess = msg => {
-    $('nokey-msg').textContent = msg;
-    $('nokey').hidden = false; $('app').hidden = true;
-  };
+  // Sin enlace válido no se muestra ninguna pantalla de acceso: se va directamente a la web
+  const noAccess = () => { location.replace('./'); };
   // Llama a una función de la agenda; si la clave no vale, muestra el aviso
   const call = async (fn, args = {}) => {
     const res = await db.rpc(fn, { p_key: KEY, ...args });
     if (res.error && res.error.code === '42501') {
       try { localStorage.removeItem(KEY_STORE); } catch (e) {}
-      noAccess('Este enlace ya no es válido. Pide uno nuevo.');
+      noAccess();
     }
     return res;
   };
   // Si se pega el enlace con la página ya abierta, el navegador no recarga: lo hacemos nosotros
   window.addEventListener('hashchange', () => { if (new URLSearchParams(location.hash.slice(1)).get('k')) location.reload(); });
-  if (!KEY) noAccess('Abre la agenda desde tu enlace privado.');
+  if (!KEY) noAccess();
   else { $('app').hidden = false; load(); }
 
   /* ---------- Agenda ---------- */
