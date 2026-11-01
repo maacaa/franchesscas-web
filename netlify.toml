@@ -1,0 +1,5 @@
+# Publicación en Netlify: solo se publican los archivos de la web
+# (no el README, el esquema SQL ni otras carpetas del repositorio).
+[build]
+  command = "mkdir -p dist && cp index.html admin.html supabase-config.js dist/"
+  publish = "dist"
