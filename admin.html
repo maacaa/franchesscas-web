@@ -251,6 +251,8 @@
     }
     return res;
   };
+  // Si se pega el enlace con la página ya abierta, el navegador no recarga: lo hacemos nosotros
+  window.addEventListener('hashchange', () => { if (new URLSearchParams(location.hash.slice(1)).get('k')) location.reload(); });
   if (!KEY) noAccess('Abre la agenda desde tu enlace privado.');
   else { $('app').hidden = false; load(); }
 
