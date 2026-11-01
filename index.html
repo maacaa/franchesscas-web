@@ -756,11 +756,31 @@
   const HEADER_H = 80;
   // Desplaza hasta una sección dejando su título justo debajo del menú (salta el relleno superior de la sección)
   const goTo = (el, offset) => {
+    // «Reservar» va directo al formulario (en móvil la foto de la reserva queda por encima)
+    if (el && el.id === 'reservar' && offset === undefined) {
+      const formOpen = document.getElementById('booking-form').style.display !== 'none';
+      el = (formOpen && el.querySelector('#booking-form .eyebrow')) || el.querySelector('.form');
+      offset = -HEADER_H - 24;
+    }
+    // Si el destino aún no ha hecho su animación de entrada (desplazado 28 px), lo colocamos ya en su sitio
+    const pending = el && el.closest('.reveal:not(.in)');
+    if (pending) {
+      pending.style.transition = 'none';
+      pending.classList.add('in');
+      void pending.offsetHeight;
+      requestAnimationFrame(() => { pending.style.transition = ''; });
+    }
     if (el && offset === undefined) {
       const pt = parseFloat(getComputedStyle(el).paddingTop) || 0;
       offset = -HEADER_H + Math.max(0, pt - 24);
     }
-    if (lenis) lenis.scrollTo(el || 0, { offset: el ? offset : 0, duration: 1.4 });
+    // Al terminar, si algo cambió de altura por el camino, se corrige para que el título quede en su sitio
+    const settle = () => {
+      if (!el) return;
+      const off = el.getBoundingClientRect().top + offset;
+      if (Math.abs(off) > 3) lenis.scrollTo(el, { offset, duration: .5 });
+    };
+    if (lenis) lenis.scrollTo(el || 0, { offset: el ? offset : 0, duration: 1.4, onComplete: settle });
     else if (el) window.scrollTo({ top: el.getBoundingClientRect().top + scrollY + offset, behavior: 'smooth' });
     else window.scrollTo({ top: 0, behavior: 'smooth' });
   };
