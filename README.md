@@ -2,6 +2,8 @@
 
 Web de la peluquería Franchessca's (Carrer de Joan Baptista Basset i Ramos, 20 · 03560 El Campello, Alicante · 629 88 32 47).
 
+**Web publicada:** https://franchesscas.netlify.app — se actualiza sola en Netlify con cada cambio que se sube a la rama `main`.
+
 ## Contenido
 
 | Archivo | Qué es |
