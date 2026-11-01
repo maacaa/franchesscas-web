@@ -1080,10 +1080,14 @@
   optsEl.addEventListener('click', e => { const b = e.target.closest('button'); if (b) setTheme(b.dataset.t); });
   picker.querySelector('.tp-close').onclick = e => { e.stopPropagation(); picker.classList.add('min'); };
   picker.addEventListener('click', () => picker.classList.remove('min'));
-  let saved = new URLSearchParams(location.search).get('tema');
-  if (!saved) { try { saved = localStorage.getItem('fr-tema2'); } catch (e) {} }
+  // El selector solo aparece en local (o añadiendo ?colores a la dirección); el público ve la paleta elegida
+  const params = new URLSearchParams(location.search);
+  const showPicker = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) || params.has('colores');
+  let saved = params.get('tema');
+  if (!saved && showPicker) { try { saved = localStorage.getItem('fr-tema2'); } catch (e) {} }
   setTheme(THEMES.some(t => t[0] === saved) ? saved : 'cereza-rosa');
-  if (innerWidth < 700) picker.classList.add('min');
+  if (!showPicker) picker.remove();
+  else if (innerWidth < 700) picker.classList.add('min');
 
 
   /* ---------- Motion: animaciones con scroll (GSAP + ScrollTrigger + Lenis) ---------- */

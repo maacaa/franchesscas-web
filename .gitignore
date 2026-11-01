@@ -11,3 +11,6 @@ Gemini_Generated_Image_*.jpg
 # Sistema
 Thumbs.db
 .DS_Store
+
+# Netlify (vínculo local con el sitio)
+.netlify/
