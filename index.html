@@ -1,0 +1,1238 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Franchessca's · Peluquería en El Campello</title>
+<meta name="description" content="Franchessca's, peluquería femenina en El Campello (Alicante). Corte, color, mechas, tratamientos y recogidos. Reserva tu cita online o en el 629 88 32 47.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F1EA;
+    --cream-2: #EFE5DA;
+    --blush: #EBD3C8;
+    --rose: #A85F4F;
+    --rose-dark: #8C4A3C;
+    --gold: #B08D57;
+    --espresso: #231A16;
+    --ink: #2E2420;
+    --ink-soft: #6E5F57;
+    --line: rgba(var(--ink-rgb), .14);
+    --card: #FFFCF8;
+    --esp-rgb: 35, 26, 22;
+    --ink-rgb: 46, 36, 32;
+    --cream-rgb: 247, 241, 234;
+    --rose-rgb: 168, 95, 79;
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
+    --max: 1240px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--blush); }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  .eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: 11px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--rose); }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.05; }
+  h2 { font-size: clamp(40px, 5.2vw, 68px); margin: 18px 0 22px; letter-spacing: -.01em; }
+  h1 em, h2 em { font-style: italic; font-weight: 300; color: var(--rose); }
+  .lead { color: var(--ink-soft); max-width: 500px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 30px; font: inherit; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; transition: background .3s, color .3s, border-color .3s, transform .3s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-dark { background: var(--rose); border-color: var(--rose); color: #fff; }
+  .btn-dark:hover { background: var(--rose-dark); border-color: var(--rose-dark); }
+  .btn-line:hover { background: var(--ink); color: var(--cream); }
+  .btn-light { border-color: rgba(255,255,255,.7); color: #fff; }
+  .btn-light:hover { background: #fff; color: var(--ink); }
+  .arrow { transition: transform .3s; }
+  .btn:hover .arrow { transform: translateX(4px); }
+  section { padding: 130px 0; }
+
+  /* Header */
+  header { position: fixed; inset: 0 0 auto 0; z-index: 50; color: #fff; transition: background .4s, color .4s, box-shadow .4s; }
+  header.scrolled, header.open { background: rgba(var(--cream-rgb), .97); color: var(--ink); box-shadow: 0 1px 0 var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 80px; gap: 24px; }
+  .logo { font-family: var(--serif); font-size: 30px; font-style: italic; line-height: 1; white-space: nowrap; }
+  .logo small { display: block; font-family: var(--sans); font-style: normal; font-size: 9px; font-weight: 600; letter-spacing: .5em; text-transform: uppercase; opacity: .7; margin-top: 4px; }
+  .menu { display: flex; gap: 36px; list-style: none; font-size: 12px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; }
+  .menu a { position: relative; padding: 4px 0; white-space: nowrap; }
+  .menu a::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: currentColor; transition: width .3s; }
+  .menu a:hover::after { width: 100%; }
+  .nav .btn { padding: 12px 22px; font-size: 11px; white-space: nowrap; }
+  .burger { display: none; background: none; border: 0; width: 30px; height: 18px; position: relative; cursor: pointer; color: inherit; }
+  .burger span { position: absolute; left: 0; width: 100%; height: 1px; background: currentColor; transition: .3s; }
+  .burger span:nth-child(1) { top: 0; } .burger span:nth-child(2) { top: 8px; } .burger span:nth-child(3) { top: 16px; }
+
+  /* Hero a pantalla completa */
+  .hero { position: relative; min-height: 100vh; padding: 0; display: flex; align-items: flex-end; color: #fff; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; }
+  .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 22%; transform: scale(1.08); animation: zoom 14s ease-out forwards; }
+  @keyframes zoom { to { transform: scale(1); } }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(var(--esp-rgb),.55) 0%, rgba(var(--esp-rgb),0) 22%), linear-gradient(90deg, rgba(var(--esp-rgb),.88) 0%, rgba(var(--esp-rgb),.72) 40%, rgba(var(--esp-rgb),.38) 65%, rgba(var(--esp-rgb),.12) 90%), linear-gradient(0deg, rgba(var(--esp-rgb),.6), transparent 40%); }
+  .hero-inner { position: relative; z-index: 2; width: 100%; padding-bottom: 72px; padding-top: 140px; }
+  .hero .eyebrow { color: var(--blush); }
+  .hero h1 { font-size: clamp(56px, 7.6vw, 112px); font-weight: 400; margin: 22px 0 26px; max-width: 780px; letter-spacing: -.02em; }
+  .hero-inner { text-shadow: 0 2px 24px rgba(0,0,0,.35); }
+  .hero-inner .btn { text-shadow: none; }
+  header:not(.scrolled):not(.open) .menu a, header:not(.scrolled):not(.open) .logo { text-shadow: 0 1px 12px rgba(0,0,0,.45); }
+  .hero h1 em { color: var(--blush); }
+  .hero p { max-width: 460px; color: rgba(255,255,255,.82); margin-bottom: 40px; font-size: 17px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-info { display: flex; gap: 0; margin-top: 72px; border-top: 1px solid rgba(255,255,255,.22); }
+  .hero-info div { flex: 1; padding: 22px 24px 0 0; font-size: 13px; color: rgba(255,255,255,.75); }
+  .hero-info b { display: block; font-family: var(--serif); font-size: 24px; font-weight: 400; color: #fff; line-height: 1.2; }
+  .scroll-cue { position: absolute; right: 32px; bottom: 40px; z-index: 1; writing-mode: vertical-rl; font-size: 10px; letter-spacing: .4em; text-transform: uppercase; color: rgba(255,255,255,.7); display: flex; align-items: center; gap: 14px; }
+  .scroll-cue::after { content: ""; width: 1px; height: 60px; background: rgba(255,255,255,.5); animation: cue 2s ease-in-out infinite; transform-origin: top; }
+  @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+  .ph { position: relative; overflow: hidden; background: var(--cream-2); }
+  .ph > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s ease; }
+
+  /* Banda */
+  .strip { background: var(--espresso); color: var(--cream); padding: 22px 0; overflow: hidden; white-space: nowrap; }
+  .strip-track { display: inline-flex; gap: 56px; animation: slide 40s linear infinite; font-family: var(--serif); font-style: italic; font-size: 26px; font-weight: 300; }
+  .strip-track span::after { content: "✦"; font-style: normal; font-size: 11px; color: var(--gold); margin-left: 56px; vertical-align: middle; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  /* El salón: collage */
+  .about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 100px; align-items: center; }
+  .collage { position: relative; height: 640px; }
+  .collage .ph { position: absolute; }
+  .collage .c2, .collage .c3 { z-index: 1; }
+  .collage .c1 { left: 0; top: 0; width: 64%; height: 78%; }
+  .collage .c2 { right: 0; top: 12%; width: 42%; height: 46%; border: 10px solid var(--cream); }
+  .collage .c3 { right: 8%; bottom: 0; width: 46%; height: 40%; border: 10px solid var(--cream); }
+  .collage .ph:hover > img { transform: scale(1.06); }
+  .collage-badge { position: absolute; left: 6%; bottom: 4%; z-index: 2; background: var(--rose); color: #fff; width: 132px; height: 132px; border-radius: 50%; display: grid; place-items: center; text-align: center; font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.15; }
+  .about p { color: var(--ink-soft); margin-bottom: 18px; max-width: 480px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 40px; border-top: 1px solid var(--line); }
+  .stats div { padding-top: 22px; }
+  .stats b { display: block; font-family: var(--serif); font-size: 40px; font-weight: 400; line-height: 1; color: var(--ink); }
+  .stats span { font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+  .signature { font-family: var(--serif); font-style: italic; font-size: 32px; margin-top: 30px; color: var(--rose); }
+
+  /* Servicios con foto por categoría */
+  .services { background: var(--cream-2); }
+  .services-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 80px; align-items: start; }
+  .svc-visual { position: sticky; top: 110px; }
+  .svc-photo { aspect-ratio: 4/5; }
+  .svc-layer { position: absolute; inset: 0; overflow: hidden; }
+  .svc-layer > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .svc-caption { margin-top: 18px; font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--ink-soft); }
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 34px 0 26px; position: sticky; top: 80px; z-index: 5; background: var(--cream-2); padding: 12px 0; }
+  .tab { background: transparent; border: 1px solid var(--line); font: inherit; font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; padding: 11px 18px; cursor: pointer; color: var(--ink-soft); transition: .3s; }
+  .tab:hover { border-color: var(--ink); color: var(--ink); }
+  .tab.active { background: var(--ink); border-color: var(--ink); color: var(--cream); }
+  .svc-block { padding-top: 10px; margin-bottom: 64px; scroll-margin-top: 170px; }
+  .svc-cat { display: flex; align-items: baseline; gap: 14px; font-size: 38px; margin-bottom: 6px; }
+  .svc-cat small { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .2em; color: var(--rose); }
+  .svc-intro { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--ink-soft); margin-bottom: 10px; }
+  .svc { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); transition: padding .35s; }
+  .svc:hover { padding-left: 12px; }
+  .svc h3 { font-size: 25px; }
+  .svc p { font-size: 14px; color: var(--ink-soft); line-height: 1.5; margin-top: 2px; }
+  .svc-book { flex-shrink: 0; background: none; border: 0; font: inherit; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--rose); cursor: pointer; padding: 6px 0; border-bottom: 1px solid currentColor; transition: color .3s; }
+  .svc-book:hover { color: var(--rose-dark); }
+  .svc-note { margin-top: 30px; font-size: 14px; color: var(--ink-soft); }
+  .svc-note a { color: var(--rose); border-bottom: 1px solid currentColor; }
+
+  /* Ritual: banner a todo el ancho */
+  .ritual { position: relative; padding: 160px 0; color: #fff; overflow: hidden; }
+  .ritual .ph { position: absolute; inset: 0; }
+  .ritual::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(var(--esp-rgb),.15), rgba(var(--esp-rgb),.75) 60%); }
+  .ritual-card { position: relative; z-index: 1; margin-left: auto; max-width: 520px; }
+  .ritual .eyebrow { color: var(--blush); }
+  .ritual h2 em { color: var(--blush); }
+  .ritual p { color: rgba(255,255,255,.82); }
+  .ritual-steps { list-style: none; margin: 32px 0 40px; counter-reset: s; }
+  .ritual-steps li { counter-increment: s; display: flex; gap: 22px; padding: 15px 0; border-top: 1px solid rgba(255,255,255,.2); }
+  .ritual-steps li::before { content: "0" counter(s); font-family: var(--serif); font-style: italic; color: var(--blush); font-size: 22px; line-height: 1.3; }
+
+  /* Galería: carrusel */
+  .gallery-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-bottom: 48px; }
+  .car-nav { display: flex; gap: 10px; }
+  .car-nav button { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--ink); background: transparent; color: var(--ink); font-size: 18px; cursor: pointer; transition: .3s; }
+  .car-nav button:hover { background: var(--ink); color: var(--cream); }
+  .carousel { --edge: max(24px, calc((100vw - var(--max)) / 2 + 24px)); display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 0 var(--edge) 12px; scroll-padding: 0 var(--edge); scrollbar-width: none; }
+  .carousel::-webkit-scrollbar { display: none; }
+  .look { flex: 0 0 auto; width: clamp(240px, 24vw, 320px); scroll-snap-align: start; margin: 0; }
+  .look:nth-child(even) { margin-top: 60px; }
+  .look .ph { aspect-ratio: 3/4; }
+  .look:hover .ph > img { transform: scale(1.06); }
+  .look figcaption { display: flex; justify-content: space-between; align-items: baseline; padding-top: 14px; }
+  .look figcaption b { font-family: var(--serif); font-weight: 400; font-size: 23px; }
+  .look figcaption span { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--rose); }
+
+  /* Opiniones */
+  .reviews { background: var(--espresso); color: var(--cream); text-align: center; }
+  .reviews .eyebrow { color: var(--blush); }
+  .reviews h2 { color: var(--cream); }
+  .reviews h2 em { color: var(--blush); }
+  .stars { color: var(--gold); letter-spacing: .35em; font-size: 14px; margin: 6px 0 26px; }
+  .quote { font-family: var(--serif); font-size: clamp(26px, 3.4vw, 42px); font-style: italic; font-weight: 300; line-height: 1.35; max-width: 880px; margin: 0 auto 26px; min-height: 3.5em; transition: opacity .4s; }
+  .quote-author { font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--blush); }
+  .dots-nav { display: flex; gap: 12px; justify-content: center; margin-top: 36px; }
+  .dots-nav button { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--blush); background: transparent; cursor: pointer; padding: 0; }
+  .dots-nav button.active { background: var(--blush); }
+
+  /* Reserva: foto + formulario */
+  .booking-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 0; align-items: stretch; background: var(--card); box-shadow: 0 30px 80px -40px rgba(var(--esp-rgb),.35); }
+  .booking-photo { position: relative; min-height: 640px; }
+  .booking-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(var(--esp-rgb),.8), transparent 55%); }
+  .booking-photo-text { position: absolute; left: 40px; right: 40px; bottom: 40px; z-index: 1; color: #fff; }
+  .booking-photo-text .eyebrow { color: var(--blush); }
+  .booking-phone { display: block; font-family: var(--serif); font-size: clamp(36px, 3.6vw, 50px); line-height: 1.1; margin: 10px 0 18px; white-space: nowrap; }
+  .booking-phone:hover { color: var(--blush); }
+  .booking-photo-text ul { list-style: none; font-size: 14px; color: rgba(255,255,255,.82); }
+  .booking-photo-text li { padding: 8px 0; border-top: 1px solid rgba(255,255,255,.2); display: flex; justify-content: space-between; gap: 16px; }
+  .form { padding: 60px 56px; }
+  .form h2 { margin-top: 14px; font-size: clamp(36px, 3.6vw, 50px); }
+  .form-intro { font-size: 15px; color: var(--ink-soft); margin-bottom: 34px; }
+  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 30px; }
+  .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .field.full { grid-column: 1 / -1; }
+  .field label { font-size: 10px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--ink-soft); }
+  .field input, .field select, .field textarea { font: inherit; font-size: 16px; color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid rgba(var(--ink-rgb),.28); padding: 10px 0; border-radius: 0; outline: none; width: 100%; transition: border-color .3s; }
+  .field select { appearance: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%232E2420'/%3E%3C/svg%3E") right center no-repeat; padding-right: 24px; cursor: pointer; }
+  .field textarea { resize: vertical; min-height: 44px; }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--rose); }
+  .field .err { font-size: 13px; color: #A3402F; }
+  .form-foot { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 38px; flex-wrap: wrap; }
+  .form-foot small { font-size: 12px; color: var(--ink-soft); max-width: 260px; line-height: 1.5; }
+  .form-ok { display: none; text-align: center; padding: 60px 0; }
+  .form-ok.show { display: block; }
+  .form-ok .check { width: 64px; height: 64px; border-radius: 50%; background: var(--rose); color: #fff; display: grid; place-items: center; margin: 0 auto 24px; font-size: 26px; }
+  .form-ok h3 { font-size: 34px; margin-bottom: 12px; }
+  .form-ok p { color: var(--ink-soft); margin-bottom: 28px; }
+
+  /* Contacto */
+  .contact { padding-top: 0; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 0; }
+  .contact-info { padding: 56px 56px 56px 0; }
+  .contact-info h2 { font-size: clamp(36px, 3.6vw, 50px); }
+  .info-row { padding: 18px 0; border-top: 1px solid var(--line); font-size: 15px; }
+  .info-row .label { display: block; font-size: 10px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--rose); margin-bottom: 4px; }
+  .info-row a:hover { color: var(--rose); }
+  .hours { list-style: none; }
+  .hours li { display: flex; justify-content: space-between; }
+  .map { min-height: 480px; background: var(--cream-2); }
+  .map iframe { width: 100%; height: 100%; min-height: 480px; border: 0; filter: grayscale(1) sepia(.25) contrast(.95); }
+
+  footer { background: var(--espresso); color: rgba(var(--cream-rgb),.65); padding: 70px 0 36px; font-size: 14px; }
+  .foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
+  footer .logo { color: var(--cream); }
+  .foot-links { display: flex; gap: 28px; letter-spacing: .16em; text-transform: uppercase; font-size: 11px; font-weight: 500; flex-wrap: wrap; }
+  .foot-links a:hover { color: var(--cream); }
+  .copy { margin-top: 48px; padding-top: 22px; border-top: 1px solid rgba(var(--cream-rgb),.12); font-size: 12px; }
+
+  .wa { position: fixed; right: 24px; bottom: 24px; z-index: 40; width: 56px; height: 56px; border-radius: 50%; background: var(--rose); color: #fff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(var(--rose-rgb),.4); transition: transform .3s; }
+  .wa:hover { transform: translateY(-3px); }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s ease, transform 1s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 1180px) { .menu { gap: 22px; letter-spacing: .12em; } }
+  @media (max-width: 960px) {
+    section { padding: 90px 0; }
+    .menu, .nav .btn { display: none; }
+    .burger { display: block; }
+    header.open .menu { display: flex; flex-direction: column; position: absolute; top: 80px; left: 0; right: 0; background: var(--cream); padding: 24px 24px 36px; gap: 22px; border-bottom: 1px solid var(--line); }
+    header.open .burger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    header.open .burger span:nth-child(2) { opacity: 0; }
+    header.open .burger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .hero::after { background: linear-gradient(0deg, rgba(var(--esp-rgb),.9) 0%, rgba(var(--esp-rgb),.55) 55%, rgba(var(--esp-rgb),.2) 100%); }
+    .hero-bg img { object-position: 60% 20%; }
+    .hero-info { flex-wrap: wrap; margin-top: 48px; }
+    .hero-info div { flex: 1 1 45%; }
+    .scroll-cue { display: none; }
+    .about-grid, .services-grid, .booking-grid, .contact-grid { grid-template-columns: minmax(0, 1fr); gap: 56px; }
+    .collage { height: 520px; }
+    .svc-visual { position: relative; top: 0; }
+    .svc-photo { aspect-ratio: 16/10; }
+    .ritual { padding: 110px 0; }
+    .ritual::after { background: rgba(var(--esp-rgb),.7); }
+    .booking-grid { gap: 0; }
+    .booking-photo { min-height: 420px; }
+    .form { padding: 44px 24px; }
+    .contact-info { padding: 0; }
+  }
+  @media (max-width: 560px) {
+    .logo { font-size: 26px; }
+    .hero h1 { font-size: 52px; }
+    .collage { height: 420px; }
+    .collage .c1 { width: 72%; height: 74%; }
+    .collage .c2 { width: 46%; height: 40%; border-width: 6px; }
+    .collage .c3 { width: 50%; height: 36%; right: 0; border-width: 6px; }
+    .collage-badge { width: 100px; height: 100px; font-size: 15px; left: 2%; }
+    .stats b { font-size: 32px; }
+    .svc { flex-wrap: wrap; }
+    .svc h3 { font-size: 22px; }
+    .fields { grid-template-columns: minmax(0, 1fr); }
+    .tab { padding: 9px 12px; font-size: 10px; letter-spacing: .1em; }
+    .look:nth-child(even) { margin-top: 30px; }
+    .booking-photo-text { left: 24px; right: 24px; bottom: 28px; }
+    .car-nav { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .strip-track, .hero-bg img, .scroll-cue::after { animation: none; }
+    .hero-bg img { transform: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ---------- Paletas de prueba (temporal: se quitará al elegir una) ---------- */
+  html[data-theme="cereza-rosa"] { --cream: #F6F3EE; --cream-2: #F3E6E4; --blush: #F6C6D3; --rose: #B3122E; --rose-dark: #8E0E24; --gold: #E88AA3; --espresso: #1B1414; --ink: #1F1919; --ink-soft: #6B5E5E; --card: #FFFFFF; --esp-rgb: 27, 20, 20; --ink-rgb: 31, 25, 25; --cream-rgb: 246, 243, 238; --rose-rgb: 179, 18, 46; }
+  html[data-theme="cereza"] { --cream: #F7F2EC; --cream-2: #EFE6DC; --blush: #F4CACA; --rose: #B3122E; --rose-dark: #8E0E24; --gold: #C9A46B; --espresso: #1B1414; --ink: #1F1919; --ink-soft: #6B5E5E; --card: #FFFDFA; --esp-rgb: 27, 20, 20; --ink-rgb: 31, 25, 25; --cream-rgb: 247, 242, 236; --rose-rgb: 179, 18, 46; }
+  html[data-theme="lila"] { --cream: #F5F3F9; --cream-2: #EAE5F4; --blush: #D8CCF3; --rose: #6A4BC4; --rose-dark: #523799; --gold: #A898D6; --espresso: #1C1A26; --ink: #1F1D29; --ink-soft: #686479; --card: #FFFFFF; --esp-rgb: 28, 26, 38; --ink-rgb: 31, 29, 41; --cream-rgb: 245, 243, 249; --rose-rgb: 106, 75, 196; }
+  html[data-theme="cobalto"] { --cream: #F6F3EE; --cream-2: #ECE6DD; --blush: #F6C6D3; --rose: #2541D6; --rose-dark: #1A2FA3; --gold: #F09BB2; --espresso: #0F1433; --ink: #141833; --ink-soft: #5D6280; --card: #FFFFFF; --esp-rgb: 15, 20, 51; --ink-rgb: 20, 24, 51; --cream-rgb: 246, 243, 238; --rose-rgb: 37, 65, 214; }
+  html[data-theme="mantequilla"] { --cream: #FBF7E9; --cream-2: #F4EBC9; --blush: #F2DF9C; --rose: #5B3723; --rose-dark: #3F2516; --gold: #C9A23A; --espresso: #2C1C13; --ink: #2C1C13; --ink-soft: #6E5A4B; --card: #FFFDF5; --esp-rgb: 44, 28, 19; --ink-rgb: 44, 28, 19; --cream-rgb: 251, 247, 233; --rose-rgb: 91, 55, 35; }
+  body, header, .services, .reviews, footer, .strip { transition: background-color .5s, color .5s; }
+  .theme-picker { position: fixed; left: 20px; bottom: 20px; z-index: 60; background: #fff; color: #222; border-radius: 16px; box-shadow: 0 12px 40px rgba(0,0,0,.18); padding: 14px 16px; font-family: var(--sans); width: 250px; }
+  .theme-picker b { display: block; font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 10px; color: #555; }
+  .theme-picker .opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .theme-picker button { background: none; border: 1px solid #e3e3e3; border-radius: 10px; padding: 8px 4px 6px; cursor: pointer; font: inherit; font-size: 11px; color: #333; display: flex; flex-direction: column; align-items: center; gap: 5px; transition: border-color .2s; }
+  .theme-picker button:hover { border-color: #999; }
+  .theme-picker button.on { border-color: #222; box-shadow: inset 0 0 0 1px #222; }
+  .theme-picker i { display: flex; width: 34px; height: 18px; border-radius: 9px; overflow: hidden; border: 1px solid rgba(0,0,0,.08); }
+  .theme-picker i span { flex: 1; }
+  .theme-picker .tp-close { position: absolute; top: 6px; right: 8px; border: 0; padding: 4px; font-size: 14px; color: #888; }
+  .theme-picker.min .opts, .theme-picker.min .tp-close { display: none; }
+  .theme-picker.min { width: auto; cursor: pointer; }
+  .theme-picker.min b { margin: 0; }
+  @media (max-width: 560px) { .theme-picker { left: 12px; bottom: 12px; width: 220px; padding: 12px; } }
+
+  /* ---------- Motion (scroll) ---------- */
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .06em .1em 0; margin-right: -.06em; }
+  .w > span { display: inline-block; will-change: transform; }
+  .traveler { position: fixed; left: 0; top: 0; z-index: 0; overflow: hidden; pointer-events: none; will-change: transform, width, height; }
+  .traveler img { width: 100%; height: 100%; object-fit: cover; }
+  .travel-on .hero-bg img { opacity: 0; }
+  .travel-on .hero-bg { background: transparent; }
+  .hero::after { opacity: var(--ov, 1); }
+  .travel-on .collage .c1:not(.arrived) img { opacity: 0; }
+  .travel-on .traveler.arrived { visibility: hidden; }
+  .h-scroll { overflow: hidden; }
+  .h-scroll .carousel { overflow: visible; scroll-snap-type: none; will-change: transform; }
+  .h-scroll .car-nav { display: none; }
+  .h-scroll .look .ph { will-change: transform, filter; }
+  .motion .strip-track { animation: none; }
+
+  /* ---------- Animación de entrada ---------- */
+  .intro { display: none; }
+  .intro-on body { overflow: hidden; }
+  .intro-on .intro { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; position: fixed; inset: 0; z-index: 200; background: var(--espresso); color: var(--cream); animation: intro-out .9s cubic-bezier(.77,0,.18,1) 1.9s forwards; }
+  .intro-name { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(52px, 9vw, 120px); line-height: 1; display: flex; overflow: hidden; padding: 0 .1em .12em; }
+  .intro-name span { display: inline-block; transform: translateY(110%); animation: intro-letter .8s cubic-bezier(.2,.8,.2,1) forwards; }
+  .intro-sub { font-size: 11px; font-weight: 600; letter-spacing: .5em; text-transform: uppercase; color: var(--blush); opacity: 0; animation: intro-fade .8s ease 1s forwards; }
+  .intro-line { width: 0; height: 1px; background: var(--blush); animation: intro-grow 1s cubic-bezier(.77,0,.18,1) .7s forwards; }
+  @keyframes intro-letter { to { transform: none; } }
+  @keyframes intro-fade { to { opacity: 1; } }
+  @keyframes intro-grow { to { width: 120px; } }
+  @keyframes intro-out { to { clip-path: inset(0 0 100% 0); } }
+
+  /* ---------- Conoce a Franchessca ---------- */
+  .team-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 100px; align-items: center; }
+  .team-photo-wrap { position: relative; }
+  .team-photo { aspect-ratio: 4/5; border-radius: 300px 300px 0 0; }
+  .team-tag { position: absolute; right: -24px; bottom: 40px; background: var(--card); padding: 16px 22px; box-shadow: 0 20px 50px -25px rgba(var(--esp-rgb), .4); font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+  .team-tag b { display: block; font-family: var(--serif); font-size: 26px; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--rose); }
+  .team-quote { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.3; margin: 6px 0 22px; padding-left: 22px; border-left: 2px solid var(--rose); }
+  .team p { color: var(--ink-soft); max-width: 520px; margin-bottom: 16px; }
+  .team-skills { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0 30px; margin-top: 26px; max-width: 520px; }
+  .team-skills li { padding: 13px 0; border-top: 1px solid var(--line); font-size: 14px; display: flex; gap: 10px; }
+  .team-skills li::before { content: "✦"; color: var(--rose); font-size: 11px; line-height: 2; }
+
+  /* ---------- Transformaciones ---------- */
+  .tf { background: var(--cream-2); }
+  .tf-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 90px; align-items: center; }
+  .tf p.lead { margin-bottom: 26px; }
+  .tf-list { list-style: none; margin: 0 0 34px; counter-reset: t; border-top: 1px solid var(--line); }
+  .tf-list li { counter-increment: t; display: grid; grid-template-columns: 44px 1fr; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--line); cursor: pointer; color: var(--ink-soft); transition: color .35s, padding .35s; }
+  .tf-list li::before { content: "0" counter(t); font-size: 11px; font-weight: 600; letter-spacing: .14em; color: var(--ink-soft); transition: color .35s; }
+  .tf-list li b { font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1.2; }
+  .tf-list li span { grid-column: 2; font-size: 14px; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .5s ease, opacity .5s ease; }
+  .tf-list li.on { color: var(--ink); padding-left: 8px; }
+  .tf-list li.on::before { color: var(--rose); }
+  .tf-list li.on b { color: var(--rose); }
+  .tf-list li.on span { max-height: 60px; opacity: 1; }
+  .tf-stage { position: relative; aspect-ratio: 4/5; overflow: hidden; background: var(--cream); box-shadow: 0 30px 80px -40px rgba(var(--esp-rgb), .45); }
+  .tf-layer { position: absolute; inset: 0; overflow: hidden; }
+  .tf-layer img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .tf-count { position: absolute; left: 22px; bottom: 20px; z-index: 5; color: #fff; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-shadow: 0 1px 8px rgba(0,0,0,.35); }
+  .tf-count b { font-family: var(--serif); font-size: 44px; font-weight: 400; letter-spacing: 0; margin-right: 4px; }
+  .tf-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; z-index: 5; background: rgba(255,255,255,.35); }
+  .tf-bar i { display: block; height: 100%; width: 0; background: var(--rose); }
+
+  /* ---------- Barra fija en el móvil ---------- */
+  .mbar { display: none; }
+  @media (max-width: 960px) {
+    .team-grid, .tf-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+    .tf-stage { order: -1; aspect-ratio: 4/4.4; }
+    .team-tag { right: 12px; }
+  }
+  @media (max-width: 700px) {
+    .mbar { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 8px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 55; background: var(--card); border-top: 1px solid var(--line); padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); }
+    .mbar a { display: flex; align-items: center; justify-content: center; gap: 7px; height: 46px; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; border: 1px solid var(--line); color: var(--ink); }
+    .mbar a svg { width: 16px; height: 16px; }
+    .mbar .mbar-main { background: var(--rose); border-color: var(--rose); color: #fff; }
+    .wa { display: none; }
+    body { padding-bottom: 72px; }
+    .theme-picker { bottom: 84px !important; }
+    .team-skills { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Animación de entrada (una vez por visita) -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-name" id="intro-name">Franchessca's</div>
+  <div class="intro-line"></div>
+  <div class="intro-sub">Peluquería · El Campello</div>
+</div>
+<script>
+  (function () {
+    var show = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    try { if (sessionStorage.getItem('fr-intro')) show = false; sessionStorage.setItem('fr-intro', '1'); } catch (e) {}
+    if (!show) return;
+    var el = document.getElementById('intro-name');
+    el.innerHTML = el.textContent.split('').map(function (c, i) { return '<span style="animation-delay:' + (0.1 + i * 0.055) + 's">' + c + '</span>'; }).join('');
+    document.documentElement.classList.add('intro-on');
+    setTimeout(function () { document.documentElement.classList.remove('intro-on'); }, 2850);
+  })();
+</script>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#" class="logo">Franchessca's<small>Peluquería</small></a>
+    <ul class="menu">
+      <li><a href="#salon">El salón</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#reservar">Reservar</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a href="#reservar" class="btn btn-dark">Pedir cita</a>
+    <button class="burger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO: foto a pantalla completa -->
+  <section class="hero">
+    <div class="hero-bg" data-photo="hero"></div>
+    <div class="wrap hero-inner">
+      <span class="eyebrow reveal">Peluquería femenina · El Campello</span>
+      <h1 class="reveal">El arte de <em>sentirte</em> tú misma</h1>
+      <p class="reveal">Cortes, color y cuidado capilar a medida en un espacio sereno, pensado para ti.</p>
+      <div class="hero-actions reveal">
+        <a href="#reservar" class="btn btn-dark">Reservar cita <span class="arrow">→</span></a>
+        <a href="#servicios" class="btn btn-light">Ver servicios</a>
+      </div>
+      <div class="hero-info reveal">
+        <div><b>Lunes a viernes</b>08:00 – 14:00</div>
+        <div><b>El Campello</b>C/ Joan Baptista Basset i Ramos, 20</div>
+        <div><b>629 88 32 47</b>Llamadas y WhatsApp</div>
+      </div>
+    </div>
+    <span class="scroll-cue">Descubre</span>
+  </section>
+
+  <div class="strip" aria-hidden="true">
+    <div class="strip-track">
+      <span>Corte & peinado</span><span>Coloración</span><span>Balayage</span><span>Tratamientos</span><span>Recogidos de novia</span><span>Alisado</span>
+      <span>Corte & peinado</span><span>Coloración</span><span>Balayage</span><span>Tratamientos</span><span>Recogidos de novia</span><span>Alisado</span>
+    </div>
+  </div>
+
+  <!-- EL SALÓN: collage de fotos -->
+  <section class="about" id="salon">
+    <div class="wrap about-grid">
+      <div class="collage reveal">
+        <div class="ph c1" data-photo="aboutHero"></div>
+        <div class="ph c2" data-photo="aboutColor"></div>
+        <div class="ph c3" data-photo="interior"></div>
+        <div class="collage-badge">Pasión<br>por el<br>detalle</div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">El salón</span>
+        <h2>Un refugio de <em>belleza</em> en El Campello</h2>
+        <p>En Franchessca's creemos que el cabello es la expresión más personal de cada mujer. Por eso dedicamos el tiempo necesario a conocerte antes de tocar las tijeras.</p>
+        <p>Trabajamos con técnicas actuales de color, corte y tratamiento, y con productos profesionales que respetan la salud de tu melena.</p>
+        <div class="stats">
+          <div><b>Color</b><span>Especialistas</span></div>
+          <div><b>1:1</b><span>Asesoramiento</span></div>
+          <div><b>Premium</b><span>Productos</span></div>
+        </div>
+        <div class="signature">— Franchessca</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS: foto que cambia por categoría -->
+  <section class="services" id="servicios">
+    <div class="wrap services-grid">
+      <div class="svc-visual reveal">
+        <div class="ph svc-photo" id="svc-photo"></div>
+        <p class="svc-caption" id="svc-caption"></p>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Carta de servicios</span>
+        <h2>Servicios <em>a medida</em></h2>
+        <p class="lead">Todos los servicios incluyen diagnóstico capilar y asesoramiento personalizado. Pide presupuesto sin compromiso.</p>
+        <div class="tabs" role="tablist" id="tabs"></div>
+        <div id="svc-list"></div>
+        <p class="svc-note">¿No sabes qué elegir? Reserva una <a href="#reservar" data-service="Asesoramiento personalizado">cita de asesoramiento</a> y te recomendamos lo que mejor va con tu cabello.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONOCE A FRANCHESSCA (texto y foto de ejemplo: sustituir por los reales) -->
+  <section class="team" id="equipo">
+    <div class="wrap team-grid">
+      <div class="team-photo-wrap reveal">
+        <div class="ph team-photo" data-photo="team"></div>
+        <div class="team-tag"><b>Franchessca</b>Fundadora · Estilista</div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Conoce a Franchessca</span>
+        <h2>Manos expertas, <em>mirada</em> cercana</h2>
+        <blockquote class="team-quote">“Mi trabajo empieza escuchándote: cada melena cuenta una historia y mi misión es que te reconozcas en ella.”</blockquote>
+        <p>Franchessca abrió su salón en El Campello con una idea clara: ofrecer un servicio de peluquería cuidado, sin prisas y totalmente personalizado.</p>
+        <p>Se forma de manera continua en las últimas técnicas de color y corte para traer a cada clienta lo mejor de las tendencias, adaptado a su estilo y a su día a día.</p>
+        <ul class="team-skills">
+          <li>Coloración y balayage</li>
+          <li>Cortes a medida</li>
+          <li>Peinados de novia</li>
+          <li>Tratamientos capilares</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- RITUAL: banner con foto a todo el ancho -->
+  <section class="ritual">
+    <div class="ph" data-photo="ritual"></div>
+    <div class="wrap">
+      <div class="ritual-card reveal">
+        <span class="eyebrow">Experiencia exclusiva</span>
+        <h2>Ritual <em>Franchessca's</em></h2>
+        <p>Nuestro tratamiento insignia: una pausa de 60 minutos para devolver a tu cabello el brillo, la suavidad y la fuerza que merece.</p>
+        <ul class="ritual-steps">
+          <li>Diagnóstico personalizado del cabello y cuero cabelludo</li>
+          <li>Doble limpieza y masaje relajante craneal</li>
+          <li>Mascarilla nutritiva con calor y sellado de cutícula</li>
+          <li>Peinado de autor y consejos de cuidado en casa</li>
+        </ul>
+        <a href="#reservar" class="btn btn-light" data-service="Ritual Franchessca's">Reservar el ritual <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA: carrusel -->
+  <section class="gallery" id="galeria">
+    <div class="wrap gallery-head reveal">
+      <div>
+        <span class="eyebrow">Inspiración</span>
+        <h2>Galería de <em>estilos</em></h2>
+      </div>
+      <div class="car-nav">
+        <button id="car-prev" aria-label="Anterior">←</button>
+        <button id="car-next" aria-label="Siguiente">→</button>
+      </div>
+    </div>
+    <div class="carousel reveal" id="gallery"></div>
+  </section>
+
+  <!-- TRANSFORMACIONES: fotos que se suceden con barrido al hacer scroll -->
+  <section class="tf" id="transformaciones">
+    <div class="wrap tf-grid">
+      <div class="reveal">
+        <span class="eyebrow">Transformaciones</span>
+        <h2>Cada melena, <em>una historia</em></h2>
+        <p class="lead">Del color al corte o al recogido: así trabajamos para que salgas sintiéndote tú misma.</p>
+        <ol class="tf-list" id="tf-list"></ol>
+        <a href="#reservar" class="btn btn-dark" data-service="Asesoramiento personalizado">Quiero mi cambio <span class="arrow">→</span></a>
+      </div>
+      <div class="tf-stage reveal" id="tf-stage">
+        <div class="tf-count"><b id="tf-num">01</b>/ 05</div>
+        <div class="tf-bar"><i id="tf-bar"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPINIONES -->
+  <section class="reviews">
+    <div class="wrap">
+      <span class="eyebrow">Opiniones</span>
+      <h2>Lo que dicen <em>nuestras clientas</em></h2>
+      <div class="stars">★★★★★</div>
+      <p class="quote" id="quote"></p>
+      <div class="quote-author" id="author"></div>
+      <div class="dots-nav" id="dots"></div>
+    </div>
+  </section>
+
+  <!-- RESERVA: foto + formulario -->
+  <section class="booking" id="reservar">
+    <div class="wrap">
+      <div class="booking-grid reveal">
+        <div class="booking-photo ph" data-photo="booking">
+          <div class="booking-photo-text">
+            <span class="eyebrow">¿Prefieres llamar?</span>
+            <a href="tel:+34629883247" class="booking-phone">629 88 32 47</a>
+            <ul>
+              <li><span>Lunes a viernes</span><span>08:00 – 14:00</span></li>
+              <li><span>Confirmación</span><span>Por WhatsApp</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="form">
+          <form id="booking-form" novalidate>
+            <span class="eyebrow">Reserva tu momento</span>
+            <h2>Solicita tu <em>cita</em></h2>
+            <p class="form-intro">Elige servicio, día y hora: solo verás las horas libres. Te confirmaremos la cita por WhatsApp.</p>
+            <div class="fields">
+              <div class="field full">
+                <label for="f-service">Servicio *</label>
+                <select id="f-service" required></select>
+                <span class="err"></span>
+              </div>
+              <div class="field">
+                <label for="f-date">Fecha *</label>
+                <input type="date" id="f-date" required>
+                <span class="err"></span>
+              </div>
+              <div class="field">
+                <label for="f-time">Hora *</label>
+                <select id="f-time" required><option value="">Elige primero la fecha</option></select>
+                <span class="err"></span>
+              </div>
+              <div class="field">
+                <label for="f-name">Nombre *</label>
+                <input type="text" id="f-name" autocomplete="name" required>
+                <span class="err"></span>
+              </div>
+              <div class="field">
+                <label for="f-phone">Teléfono *</label>
+                <input type="tel" id="f-phone" autocomplete="tel" inputmode="tel" required>
+                <span class="err"></span>
+              </div>
+              <div class="field full">
+                <label for="f-notes">Comentarios</label>
+                <textarea id="f-notes" rows="2" placeholder="Largo de tu cabello, color actual, si es tu primera visita…"></textarea>
+                <span class="err"></span>
+              </div>
+            </div>
+            <div class="form-foot">
+              <small>Al enviar aceptas que usemos tus datos solo para gestionar tu cita.</small>
+              <button type="submit" class="btn btn-dark">Solicitar cita</button>
+            </div>
+          </form>
+          <div class="form-ok" id="form-ok">
+            <div class="check">✓</div>
+            <h3>¡Solicitud recibida!</h3>
+            <p id="ok-text">Te confirmaremos la cita por WhatsApp en breve.</p>
+            <button class="btn btn-line" id="ok-again">Hacer otra reserva</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contact" id="contacto">
+    <div class="wrap contact-grid">
+      <div class="contact-info reveal">
+        <span class="eyebrow">Visítanos</span>
+        <h2>Te esperamos en <em>El Campello</em></h2>
+        <div class="info-row">
+          <span class="label">Dirección</span>
+          Carrer de Joan Baptista Basset i Ramos, 20<br>03560 El Campello, Alicante
+        </div>
+        <div class="info-row">
+          <span class="label">Teléfono</span>
+          <a href="tel:+34629883247">629 88 32 47</a>
+        </div>
+        <div class="info-row">
+          <span class="label">Horario</span>
+          <ul class="hours">
+            <li><span>Lunes – Viernes</span><span>08:00 – 14:00</span></li>
+            <li><span>Sábado y domingo</span><span>Cerrado</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="map reveal">
+        <iframe title="Mapa de Franchessca's" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://maps.google.com/maps?q=Carrer%20de%20Joan%20Baptista%20Basset%20i%20Ramos%2020%2C%2003560%20El%20Campello%2C%20Alicante&z=16&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a href="#" class="logo">Franchessca's<small>Peluquería</small></a>
+      <div class="foot-links">
+        <a href="#salon">El salón</a><a href="#servicios">Servicios</a><a href="#galeria">Galería</a><a href="#reservar">Reservar</a><a href="#contacto">Contacto</a>
+      </div>
+    </div>
+    <div class="copy">© 2026 Franchessca's · El Campello, Alicante · Aviso legal · Política de privacidad</div>
+  </div>
+</footer>
+
+<!-- Barra fija con acciones rápidas (solo móvil) -->
+<nav class="mbar" aria-label="Acciones rápidas">
+  <a href="#reservar" class="mbar-main"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Reservar</a>
+  <a href="tel:+34629883247"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Llamar</a>
+  <a href="https://wa.me/34629883247" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21l1.6-4.8A8.5 8.5 0 1 1 8 19.6z"/></svg>WhatsApp</a>
+</nav>
+
+<a href="https://wa.me/34629883247" target="_blank" rel="noopener" class="wa" aria-label="Escríbenos por WhatsApp">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+</a>
+
+
+<!-- Selector de colores (temporal: se quitará al elegir una paleta) -->
+<div class="theme-picker" id="theme-picker">
+  <button class="tp-close" aria-label="Minimizar">–</button>
+  <b>Prueba los colores</b>
+  <div class="opts" id="theme-opts"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/dist/umd/supabase.min.js"></script>
+<script src="supabase-config.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+  const PHONE_WA = '34629883247';
+
+  /* ---------- Fotos (Unsplash, licencia libre — sustituir por fotos propias del salón) ---------- */
+  const img = (id, w, alt, pos = 'center') =>
+    `<img src="https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80" alt="${alt}" loading="lazy" style="object-position:${pos}">`;
+  const P = {
+    hero: 'photo-1497433550656-7fb185be365e',
+    ritual: 'photo-1634449571010-02389ed0f9b0',
+    interior: 'photo-1626379501846-0df4067b8bb9',
+    balayage: 'photo-1638064432604-8da1fc75de09',
+    bob: 'photo-1608877607386-8698047d65a9',
+    novia: 'photo-1623428455512-264b33ca8cec',
+    rizos: 'photo-1712641966810-611ff1503c6d',
+    pixie: 'photo-1598771326492-f523d7bd3e89',
+    cobrizo: 'photo-1628266857311-f759c7a73bc6',
+    trenza: 'photo-1681387744797-4eb711161586'
+  };
+  const PHOTOS = {
+    hero: [P.hero, 'Melena dorada con ondas', '62% 40%', 2200],
+    interior: [P.interior, 'Interior luminoso del salón', 'center', 800],
+    aboutHero: [P.hero, 'Melena dorada con ondas', '62% 40%', 1400],
+    aboutColor: [P.balayage, 'Melena con balayage caramelo', 'center 30%', 700],
+    ritual: [P.ritual, 'Lavado y tratamiento capilar en el salón', 'center 40%', 2000],
+    booking: [P.cobrizo, 'Clienta sonriente con melena cobriza', 'center 30%', 1200],
+    team: ['photo-1548382131-e0ebb1f0cdea', 'Franchessca, fundadora y estilista', 'center 25%', 900]
+  };
+  document.querySelectorAll('[data-photo]').forEach(el => {
+    const [id, alt, pos, w] = PHOTOS[el.dataset.photo];
+    el.insertAdjacentHTML('afterbegin', img(id, w, alt, pos));
+  });
+  document.querySelector('.hero-bg img').loading = 'eager';
+
+  let lenis = null;
+  const goTo = (el, offset = -80) => {
+    if (lenis) lenis.scrollTo(el || 0, { offset: el ? offset : 0, duration: 1.4 });
+    else if (el) window.scrollTo({ top: el.getBoundingClientRect().top + scrollY + offset, behavior: 'smooth' });
+    else window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  /* ---------- Servicios (editar aquí para cambiar la carta) ---------- */
+  const SERVICES = [
+    { cat: 'Corte & peinado', photo: [P.bob, 'center 30%'], intro: 'Cortes pensados para tu tipo de cabello, tu rostro y tu rutina.', items: [
+      ['Corte, lavado y peinado', 'Diagnóstico, corte personalizado y acabado.'],
+      ['Corte de puntas / sanear', 'Mantiene el largo y elimina las puntas abiertas.'],
+      ['Corte de flequillo', 'Retoque entre visitas para mantener la forma.'],
+      ['Lavado y peinado', 'Brushing liso, con volumen o pulido.'],
+      ['Peinado con ondas', 'Ondas al agua, surferas o glamour con plancha o tenacilla.'],
+      ['Cambio de look', 'Asesoría de imagen y transformación completa.'],
+      ['Corte infantil (niñas)', 'Cortes sencillos y con mucha paciencia.'],
+      ['Asesoramiento personalizado', 'Te ayudamos a elegir corte y color antes de decidir.']
+    ]},
+    { cat: 'Color & mechas', photo: [P.balayage, 'center 30%'], intro: 'Color luminoso y a medida, cuidando la fibra en cada proceso.', items: [
+      ['Tinte de raíz', 'Retoque de raíz y cobertura de canas.'],
+      ['Tinte completo', 'Color uniforme de medios a puntas.'],
+      ['Mechas', 'Con papel o con gorro, para aportar luz.'],
+      ['Balayage', 'Iluminación natural pintada a mano alzada.'],
+      ['Babylights', 'Mechas muy finas para un rubio sutil.'],
+      ['Baño de color / matiz', 'Aporta brillo y neutraliza tonos no deseados.'],
+      ['Decoloración', 'Aclarado controlado con protección de la fibra.'],
+      ['Corrección de color', 'Recuperamos el tono que buscas tras un mal resultado.']
+    ]},
+    { cat: 'Tratamientos', photo: [P.rizos, 'center 25%'], intro: 'Rituales de cuidado para un cabello sano, fuerte y brillante.', items: [
+      ["Ritual Franchessca's", 'Nuestro tratamiento insignia de hidratación y masaje.'],
+      ['Hidratación profunda', 'Mascarilla intensiva para cabellos secos.'],
+      ['Reconstrucción capilar', 'Repara la fibra en cabellos dañados o decolorados.'],
+      ['Alisado de keratina', 'Elimina el encrespamiento durante meses.'],
+      ['Botox capilar', 'Rellena, suaviza y aporta brillo extremo.'],
+      ['Tratamiento anticaída', 'Estimula y fortalece la raíz.'],
+      ['Tratamiento de cuero cabelludo', 'Para caspa, grasa o sensibilidad.'],
+      ['Permanente / ondulación', 'Ondas y rizos duraderos con acabado natural.']
+    ]},
+    { cat: 'Novias & eventos', photo: [P.novia, 'center 40%'], intro: 'Peinados que duran toda la celebración y te hacen sentir única.', items: [
+      ['Recogido de novia', 'Incluye prueba previa y asesoramiento.'],
+      ['Prueba de novia', 'Diseñamos juntas el peinado de tu gran día.'],
+      ['Recogido de invitada', 'Bodas, bautizos, comuniones y eventos.'],
+      ['Semirecogido', 'Lo mejor del pelo suelto y del recogido.'],
+      ['Trenzas', 'Boho, de espiga o adornadas.'],
+      ['Peinado de fiesta', 'Ondas, pulidos o volumen para tu evento.'],
+      ['Peinado de comunión', 'Peinados delicados para las más pequeñas.'],
+      ['Servicio a domicilio', 'Nos desplazamos para novias y grupos. Consultar.']
+    ]}
+  ];
+
+  const tabsEl = document.getElementById('tabs'), listEl = document.getElementById('svc-list');
+  const svcPhoto = document.getElementById('svc-photo'), svcCaption = document.getElementById('svc-caption');
+  const MOTION_OK = !matchMedia('(prefers-reduced-motion: reduce)').matches && !!window.gsap;
+  listEl.innerHTML = SERVICES.map((c, i) => `
+    <div class="svc-block" data-i="${i}" id="cat-${i}">
+      <h3 class="svc-cat"><small>0${i + 1}</small>${c.cat}</h3>
+      <p class="svc-intro">${c.intro}</p>
+      ${c.items.map(([n, d]) => `<div class="svc"><div><h3>${n}</h3><p>${d}</p></div><button class="svc-book" data-service="${n.replace(/"/g, '&quot;')}">Reservar</button></div>`).join('')}
+    </div>`).join('');
+  let curCat = -1;
+  // Cambia la foto con un barrido tipo cortina
+  const setCat = i => {
+    if (i === curCat) return;
+    curCat = i;
+    [...tabsEl.children].forEach((t, j) => t.classList.toggle('active', j === i));
+    const [id, pos] = SERVICES[i].photo;
+    const layer = document.createElement('div');
+    layer.className = 'svc-layer';
+    layer.innerHTML = img(id, 1000, SERVICES[i].cat, pos);
+    svcPhoto.appendChild(layer);
+    svcCaption.textContent = SERVICES[i].cat;
+    const cleanup = () => { while (svcPhoto.children.length > 1 && svcPhoto.lastChild === layer) svcPhoto.firstChild.remove(); };
+    if (MOTION_OK && svcPhoto.children.length > 1) {
+      gsap.fromTo(layer, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1, ease: 'power3.inOut', onComplete: cleanup });
+      gsap.fromTo(layer.firstChild, { scale: 1.25 }, { scale: 1, duration: 1.4, ease: 'power3.out' });
+    } else cleanup();
+  };
+  SERVICES.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.className = 'tab'; b.textContent = s.cat; b.setAttribute('role', 'tab');
+    b.onclick = () => goTo(document.getElementById('cat-' + i), -170);
+    tabsEl.appendChild(b);
+  });
+  setCat(0);
+  // La categoría activa es la que ocupa el centro de la pantalla
+  const catIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setCat(+e.target.dataset.i); }), { rootMargin: '-45% 0px -45% 0px' });
+  document.querySelectorAll('.svc-block').forEach(b => catIO.observe(b));
+  // Precarga las fotos de las categorías para que el cambio sea instantáneo
+  SERVICES.forEach(s => { new Image().src = `https://images.unsplash.com/${s.photo[0]}?auto=format&fit=crop&w=1000&q=80`; });
+
+  /* ---------- Galería (carrusel) ---------- */
+  const GALLERY = [
+    [P.balayage, 'Balayage', 'Color', 'Melena con balayage caramelo y ondas'],
+    [P.bob, 'Bob pulido', 'Corte', 'Corte bob liso con flequillo'],
+    [P.novia, 'Recogido de novia', 'Novias', 'Recogido trenzado de novia con flores'],
+    [P.rizos, 'Rizos definidos', 'Tratamiento', 'Mujer con rizos definidos'],
+    [P.pixie, 'Pixie', 'Corte', 'Corte pixie con flequillo ladeado'],
+    [P.cobrizo, 'Cobrizo', 'Color', 'Melena cobriza con flequillo'],
+    [P.trenza, 'Trenza boho', 'Eventos', 'Trenza de raíz']
+  ];
+  const car = document.getElementById('gallery');
+  car.innerHTML = GALLERY.map(([id, t, s, alt]) =>
+    `<figure class="look"><div class="ph">${img(id, 700, alt, 'center 25%')}</div><figcaption><b>${t}</b><span>${s}</span></figcaption></figure>`).join('');
+  const step = () => car.querySelector('.look').offsetWidth + 22;
+  document.getElementById('car-prev').onclick = () => car.scrollBy({ left: -step(), behavior: 'smooth' });
+  document.getElementById('car-next').onclick = () => car.scrollBy({ left: step(), behavior: 'smooth' });
+
+
+  /* ---------- Transformaciones ---------- */
+  const TF = [
+    [P.balayage, 'Balayage caramelo', 'Luz natural pintada a mano, de raíz suave a puntas doradas.', 'center 30%'],
+    [P.cobrizo, 'Cobrizo intenso', 'Un rojo cálido y brillante que ilumina el rostro.', 'center 30%'],
+    [P.rizos, 'Rizos definidos', 'Hidratación y forma para rizos con volumen y sin encrespamiento.', 'center 25%'],
+    [P.pixie, 'Corte pixie', 'Corto, atrevido y fácil de llevar, con flequillo ladeado.', 'center 25%'],
+    [P.novia, 'Recogido de novia', 'Trenzas y flores para un peinado que dura toda la celebración.', 'center 40%']
+  ];
+  const tfStage = document.getElementById('tf-stage'), tfList = document.getElementById('tf-list');
+  const tfNum = document.getElementById('tf-num'), tfBar = document.getElementById('tf-bar');
+  tfList.innerHTML = TF.map(([, t, d]) => `<li><b>${t}</b><span>${d}</span></li>`).join('');
+  let tfCur = -1;
+  const setTf = i => {
+    if (i === tfCur) return;
+    const dir = i > tfCur ? 1 : -1;
+    tfCur = i;
+    [...tfList.children].forEach((li, j) => li.classList.toggle('on', j === i));
+    tfNum.textContent = '0' + (i + 1);
+    const [id, t, , pos] = TF[i];
+    const layer = document.createElement('div');
+    layer.className = 'tf-layer';
+    layer.innerHTML = img(id, 1000, t, pos);
+    tfStage.insertBefore(layer, tfStage.querySelector('.tf-count'));
+    const layers = () => tfStage.querySelectorAll('.tf-layer');
+    const cleanup = () => { const ls = layers(); if (ls[ls.length - 1] === layer) for (let k = 0; k < ls.length - 1; k++) ls[k].remove(); };
+    if (MOTION_OK && layers().length > 1) {
+      gsap.fromTo(layer, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.1, ease: 'power3.inOut', onComplete: cleanup });
+      gsap.fromTo(layer.firstChild, { scale: 1.2, xPercent: 8 * dir }, { scale: 1, xPercent: 0, duration: 1.5, ease: 'power3.out' });
+    } else cleanup();
+  };
+  TF.forEach(([id]) => { new Image().src = `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1000&q=80`; });
+  setTf(0);
+  // Sin scroll anclado (móvil): las fotos cambian solas; la barra marca el tiempo
+  const TF_MS = 3800;
+  let tfTimer = null, tfPinned = null;
+  const tfStartAuto = () => {
+    clearInterval(tfTimer);
+    if (MOTION_OK) gsap.fromTo(tfBar, { width: '0%' }, { width: '100%', duration: TF_MS / 1000, ease: 'none', repeat: -1 });
+    tfTimer = setInterval(() => setTf((tfCur + 1) % TF.length), TF_MS);
+  };
+  const tfStopAuto = () => { clearInterval(tfTimer); if (window.gsap) gsap.killTweensOf(tfBar); };
+  tfList.addEventListener('click', e => {
+    const li = e.target.closest('li'); if (!li) return;
+    const i = [...tfList.children].indexOf(li);
+    if (tfPinned && lenis) lenis.scrollTo(tfPinned.start + (i + .5) / TF.length * (tfPinned.end - tfPinned.start), { duration: 1.2 });
+    else { setTf(i); tfStartAuto(); }
+  });
+  tfStartAuto();
+
+  /* ---------- Header + menú móvil ---------- */
+  const header = document.querySelector('header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll); onScroll();
+  document.querySelector('.burger').addEventListener('click', () => header.classList.toggle('open'));
+  document.querySelectorAll('.menu a').forEach(a => a.addEventListener('click', () => header.classList.remove('open')));
+
+  /* ---------- Opiniones (ejemplos — sustituir por reseñas reales) ---------- */
+  const reviews = [
+    ['"Salgo siempre encantada. Me escuchan, me aconsejan y el color queda exactamente como lo imaginaba."', 'Laura M.'],
+    ['"Un ambiente precioso y tranquilo. El ritual de hidratación ha cambiado por completo mi pelo."', 'Carmen R.'],
+    ['"Me peinaron para mi boda y fue perfecto de principio a fin. Profesionalidad y mucho cariño."', 'Andrea P.']
+  ];
+  const q = document.getElementById('quote'), au = document.getElementById('author'), dots = document.getElementById('dots');
+  let idx = 0;
+  const show = i => {
+    idx = i; q.style.opacity = 0;
+    setTimeout(() => { q.textContent = reviews[i][0]; au.textContent = reviews[i][1]; q.style.opacity = 1; }, 250);
+    [...dots.children].forEach((d, j) => d.classList.toggle('active', j === i));
+  };
+  reviews.forEach((_, i) => { const b = document.createElement('button'); b.setAttribute('aria-label', 'Opinión ' + (i + 1)); b.onclick = () => show(i); dots.appendChild(b); });
+  show(0);
+  setInterval(() => show((idx + 1) % reviews.length), 6000);
+
+  /* ---------- Reservas ---------- */
+  const form = document.getElementById('booking-form');
+  const fService = document.getElementById('f-service'), fDate = document.getElementById('f-date'), fTime = document.getElementById('f-time');
+  const fName = document.getElementById('f-name'), fPhone = document.getElementById('f-phone'), fNotes = document.getElementById('f-notes');
+
+  fService.innerHTML = '<option value="">Selecciona un servicio</option>' + SERVICES.map(s =>
+    `<optgroup label="${s.cat}">${s.items.map(([n]) => `<option>${n}</option>`).join('')}</optgroup>`).join('');
+
+  const pad = n => String(n).padStart(2, '0');
+  const today = new Date();
+  fDate.min = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+
+  // Horario: lunes a viernes 08:00–14:00 (última cita 30 min antes del cierre)
+  const slotsFor = day => {
+    if (day === 0 || day === 6) return [];
+    const [from, to] = [8 * 60, 13 * 60 + 30];
+    const out = [];
+    for (let m = from; m <= to; m += 30) out.push(`${pad(Math.floor(m / 60))}:${pad(m % 60)}`);
+    return out;
+  };
+  const setErr = (el, msg) => { el.parentElement.querySelector('.err').textContent = msg || ''; };
+
+  // Supabase (si está configurado en supabase-config.js)
+  const db = window.SUPABASE_URL && window.supabase ? window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_KEY) : null;
+
+  const loadSlots = async () => {
+    setErr(fDate); setErr(fTime);
+    if (!fDate.value) { fTime.innerHTML = '<option value="">Elige primero la fecha</option>'; return; }
+    const day = new Date(fDate.value + 'T00:00').getDay();
+    let slots = slotsFor(day);
+    if (!slots.length) {
+      setErr(fDate, 'Los fines de semana estamos cerrados.');
+      fTime.innerHTML = '<option value="">Sin horario</option>';
+      return;
+    }
+    if (fDate.value === fDate.min) {
+      const now = new Date(), nowStr = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+      slots = slots.filter(s => s > nowStr);
+    }
+    let busy = [];
+    if (db) {
+      fTime.innerHTML = '<option value="">Consultando disponibilidad…</option>';
+      const { data, error } = await db.rpc('get_busy_slots', { p_date: fDate.value });
+      if (!error) busy = data.map(t => String(t).slice(0, 5));
+    }
+    const free = slots.filter(s => !busy.includes(s));
+    if (!free.length) {
+      setErr(fDate, 'No quedan horas libres este día. Prueba con otra fecha.');
+      fTime.innerHTML = '<option value="">Completo</option>';
+      return;
+    }
+    fTime.innerHTML = '<option value="">Selecciona hora</option>' + free.map(s => `<option>${s}</option>`).join('');
+  };
+  fDate.addEventListener('change', loadSlots);
+
+  // Enlaces internos (#reservar, #servicios…): desplazamiento por código, funciona también en vistas previas
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || a.hasAttribute('data-service')) return;
+    e.preventDefault();
+    const id = a.getAttribute('href').slice(1);
+    goTo(id ? document.getElementById(id) : null);
+    header.classList.remove('open');
+  });
+
+  // Botones "Reservar" con servicio preseleccionado
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-service]');
+    if (!t) return;
+    e.preventDefault();
+    fService.value = t.dataset.service;
+    setErr(fService);
+    goTo(document.getElementById('reservar'));
+    setTimeout(() => fDate.focus({ preventScroll: true }), 1300);
+  });
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    let ok = true;
+    const need = (el, msg) => { if (!el.value.trim()) { setErr(el, msg); ok = false; } else setErr(el); };
+    need(fService, 'Elige un servicio.');
+    need(fDate, 'Elige una fecha.');
+    need(fTime, 'Elige una hora.');
+    need(fName, 'Indica tu nombre.');
+    need(fPhone, 'Indica tu teléfono.');
+    if (fPhone.value.trim() && fPhone.value.replace(/\D/g, '').length < 9) { setErr(fPhone, 'Revisa el número de teléfono.'); ok = false; }
+    if (fDate.value && new Date(fDate.value + 'T00:00').getDay() % 6 === 0) { setErr(fDate, 'Los fines de semana estamos cerrados.'); ok = false; }
+    if (!ok) return;
+
+    const fecha = new Date(fDate.value + 'T00:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+
+    if (db) {
+      const btn = form.querySelector('button[type=submit]');
+      btn.disabled = true; btn.textContent = 'Enviando…';
+      const { error } = await db.from('appointments').insert({
+        service: fService.value, date: fDate.value, time: fTime.value,
+        name: fName.value.trim(), phone: fPhone.value.trim(), notes: fNotes.value.trim() || null
+      });
+      btn.disabled = false; btn.textContent = 'Solicitar cita';
+      if (error) {
+        if (error.code === '23505') { setErr(fTime, 'Esa hora se acaba de ocupar. Elige otra, por favor.'); loadSlots(); }
+        else setErr(fNotes, 'No hemos podido enviar la solicitud. Inténtalo de nuevo o llámanos al 629 88 32 47.');
+        return;
+      }
+      document.getElementById('ok-text').textContent = `Hemos recibido tu solicitud de ${fService.value} para el ${fecha} a las ${fTime.value}. Te confirmaremos la cita por WhatsApp en breve.`;
+      form.style.display = 'none';
+      document.getElementById('form-ok').classList.add('show');
+      return;
+    }
+
+    const msg = [
+      "Hola Franchessca's, me gustaría reservar cita:",
+      `• Servicio: ${fService.value}`,
+      `• Fecha: ${fecha}`,
+      `• Hora: ${fTime.value}`,
+      `• Nombre: ${fName.value.trim()}`,
+      `• Teléfono: ${fPhone.value.trim()}`,
+      fNotes.value.trim() ? `• Comentarios: ${fNotes.value.trim()}` : ''
+    ].filter(Boolean).join('\n');
+    window.open(`https://wa.me/${PHONE_WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+
+    document.getElementById('ok-text').textContent = `Hemos preparado tu solicitud de ${fService.value} para el ${fecha} a las ${fTime.value}. Envía el mensaje de WhatsApp que se acaba de abrir y te confirmaremos la cita en breve.`;
+    form.style.display = 'none';
+    document.getElementById('form-ok').classList.add('show');
+  });
+  document.getElementById('ok-again').addEventListener('click', () => {
+    form.reset(); fTime.innerHTML = '<option value="">Elige primero la fecha</option>';
+    document.getElementById('form-ok').classList.remove('show');
+    form.style.display = '';
+  });
+
+
+  /* ---------- Selector de colores (temporal) ---------- */
+  const THEMES = [
+    ['cereza-rosa', 'Cereza y rosa', '#F6C6D3', '#B3122E'],
+    ['clasico', 'Champán', '#F7F1EA', '#A85F4F'],
+    ['cereza', 'Cereza', '#F7F2EC', '#B3122E'],
+    ['lila', 'Lila', '#F5F3F9', '#6A4BC4'],
+    ['cobalto', 'Cobalto', '#F6C6D3', '#2541D6'],
+    ['mantequilla', 'Mantequilla', '#F2DF9C', '#5B3723']
+  ];
+  const picker = document.getElementById('theme-picker'), optsEl = document.getElementById('theme-opts');
+  const setTheme = t => {
+    if (t === 'clasico') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', t);
+    [...optsEl.children].forEach(b => b.classList.toggle('on', b.dataset.t === t));
+    try { localStorage.setItem('fr-tema2', t); } catch (e) {}
+  };
+  optsEl.innerHTML = THEMES.map(([k, n, a, b]) => `<button data-t="${k}"><i><span style="background:${a}"></span><span style="background:${b}"></span></i>${n}</button>`).join('');
+  optsEl.addEventListener('click', e => { const b = e.target.closest('button'); if (b) setTheme(b.dataset.t); });
+  picker.querySelector('.tp-close').onclick = e => { e.stopPropagation(); picker.classList.add('min'); };
+  picker.addEventListener('click', () => picker.classList.remove('min'));
+  let saved = new URLSearchParams(location.search).get('tema');
+  if (!saved) { try { saved = localStorage.getItem('fr-tema2'); } catch (e) {} }
+  setTheme(THEMES.some(t => t[0] === saved) ? saved : 'cereza-rosa');
+  if (innerWidth < 700) picker.classList.add('min');
+
+
+  /* ---------- Motion: animaciones con scroll (GSAP + ScrollTrigger + Lenis) ---------- */
+  if (MOTION_OK && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+    document.documentElement.classList.add('motion');
+
+    // Scroll suave
+    if (window.Lenis) {
+      lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(t => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+      if (document.documentElement.classList.contains('intro-on')) { lenis.stop(); setTimeout(() => lenis.start(), 2850); }
+    }
+
+    // Títulos: las palabras suben desde una máscara
+    const splitWords = el => {
+      [...el.childNodes].forEach(node => {
+        if (node.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          node.textContent.split(/(\s+)/).forEach(part => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+            const w = document.createElement('span'); w.className = 'w';
+            const inner = document.createElement('span'); inner.textContent = part;
+            w.appendChild(inner); frag.appendChild(w);
+          });
+          node.replaceWith(frag);
+        } else if (node.nodeType === 1) splitWords(node);
+      });
+    };
+    const heroTitle = document.querySelector('.hero h1');
+    heroTitle.classList.remove('reveal');
+    splitWords(heroTitle);
+    const introOn = document.documentElement.classList.contains('intro-on');
+    gsap.from(heroTitle.querySelectorAll('.w > span'), { yPercent: 115, duration: 1.3, ease: 'power4.out', stagger: .09, delay: introOn ? 2.3 : .25 });
+    document.querySelectorAll('main h2').forEach(h => {
+      splitWords(h);
+      gsap.from(h.querySelectorAll('.w > span'), { yPercent: 115, duration: 1.1, ease: 'power4.out', stagger: .06, scrollTrigger: { trigger: h, start: 'top 88%' } });
+    });
+
+    // Banda: va más rápido cuanto más rápido haces scroll
+    const stripTrack = document.querySelector('.strip-track');
+    const stripTween = gsap.to(stripTrack, { xPercent: -50, duration: 40, ease: 'none', repeat: -1 });
+    ScrollTrigger.create({
+      onUpdate: self => {
+        const v = Math.min(Math.abs(self.getVelocity()) / 250, 10);
+        gsap.to(stripTween, { timeScale: 1 + v, duration: .25, overwrite: true, onComplete: () => gsap.to(stripTween, { timeScale: 1, duration: 1.2 }) });
+      }
+    });
+
+    // Fotos que aparecen con máscara (barrido de abajo arriba + zoom hacia atrás)
+    document.querySelectorAll('.collage .c2, .collage .c3, .booking-photo, .svc-photo, .team-photo').forEach(el => {
+      const st = { trigger: el, start: 'top 85%' };
+      gsap.fromTo(el, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'power4.inOut', scrollTrigger: st });
+      const im = el.querySelector('img');
+      if (im) gsap.fromTo(im, { scale: 1.3 }, { scale: 1, duration: 1.8, ease: 'power3.out', scrollTrigger: st });
+    });
+
+    const mm = gsap.matchMedia();
+    mm.add('(min-width: 961px)', () => {
+      // 1) La foto de portada viaja hasta el collage de "El salón"
+      const heroImg = document.querySelector('.hero-bg img');
+      const c1 = document.querySelector('.collage .c1');
+      const collage = document.querySelector('.collage');
+      collage.classList.remove('reveal');
+      const trav = document.createElement('div');
+      trav.className = 'traveler';
+      trav.innerHTML = `<img src="${heroImg.src}" alt="" style="object-position:${heroImg.style.objectPosition}">`;
+      document.body.appendChild(trav);
+      document.documentElement.classList.add('travel-on');
+      const lerp = (a, b, t) => a + (b - a) * t;
+      const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      const travel = () => {
+        const r = c1.getBoundingClientRect();
+        const end = r.top + scrollY - 130;
+        const p = Math.min(Math.max(scrollY / end, 0), 1), e = ease(p);
+        const W = innerWidth, H = innerHeight;
+        trav.style.width = lerp(W, r.width, e) + 'px';
+        trav.style.height = lerp(H, r.height, e) + 'px';
+        trav.style.transform = `translate(${lerp(0, r.left, e)}px, ${lerp(0, r.top + (scrollY < end ? 0 : 0), e)}px)`;
+        trav.style.borderRadius = Math.sin(p * Math.PI) * 40 + 'px';
+        const done = p >= 1;
+        trav.classList.toggle('arrived', done);
+        c1.classList.toggle('arrived', done);
+      };
+      ScrollTrigger.create({ start: 0, end: 'max', onUpdate: travel, onRefresh: travel });
+      travel();
+      // El texto de portada se desvanece y sube
+      gsap.to('.hero-inner', { yPercent: -18, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: '60% top', scrub: true } });
+      gsap.fromTo('.hero', { '--ov': 1 }, { '--ov': 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: '30% top', end: 'bottom top', scrub: true } });
+      gsap.to('.scroll-cue', { opacity: 0, scrollTrigger: { trigger: '.hero', start: 'top top', end: '20% top', scrub: true } });
+
+      // 5) Collage en capas (parallax)
+      gsap.to('.collage .c2', { y: -70, ease: 'none', scrollTrigger: { trigger: collage, start: 'top bottom', end: 'bottom top', scrub: true } });
+      gsap.to('.collage .c3', { y: -130, ease: 'none', scrollTrigger: { trigger: collage, start: 'top bottom', end: 'bottom top', scrub: true } });
+      gsap.to('.collage-badge', { y: -40, rotate: -12, ease: 'none', scrollTrigger: { trigger: collage, start: 'top bottom', end: 'bottom top', scrub: true } });
+
+      // 2) Galería horizontal anclada: el scroll vertical mueve las fotos en horizontal
+      const gal = document.getElementById('galeria');
+      const track = document.getElementById('gallery');
+      gal.classList.add('h-scroll');
+      const looks = [...track.querySelectorAll('.look')];
+      const dist = () => track.scrollWidth - track.clientWidth;
+      const focus = () => {
+        const cx = innerWidth / 2;
+        looks.forEach(l => {
+          const r = l.getBoundingClientRect();
+          const d = Math.min(Math.abs(r.left + r.width / 2 - cx) / (innerWidth / 2), 1);
+          const ph = l.querySelector('.ph');
+          ph.style.transform = `scale(${1.05 - d * .15})`;
+          ph.style.filter = `grayscale(${d * .7}) brightness(${1 - d * .08})`;
+        });
+      };
+      gsap.to(track, {
+        x: () => -dist(), ease: 'none',
+        scrollTrigger: { trigger: gal, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, onUpdate: focus, onRefresh: focus }
+      });
+      focus();
+
+      // Transformaciones ancladas: el scroll pasa de un look al siguiente con barrido
+      tfStopAuto();
+      tfPinned = ScrollTrigger.create({
+        trigger: '#transformaciones', start: 'top top', end: () => '+=' + innerHeight * .75 * TF.length, pin: true,
+        onUpdate: self => {
+          setTf(Math.min(TF.length - 1, Math.floor(self.progress * TF.length)));
+          tfBar.style.width = (self.progress * 100) + '%';
+        }
+      });
+
+      return () => {
+        tfPinned = null;
+        tfBar.style.width = '0%';
+        tfStartAuto();
+        trav.remove();
+        document.documentElement.classList.remove('travel-on');
+        gal.classList.remove('h-scroll');
+        looks.forEach(l => { const ph = l.querySelector('.ph'); ph.style.transform = ''; ph.style.filter = ''; });
+      };
+    });
+
+    // Recalcula posiciones cuando terminan de cargar las fotos
+    window.addEventListener('load', () => ScrollTrigger.refresh());
+  }
+
+  /* ---------- Animación de aparición ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

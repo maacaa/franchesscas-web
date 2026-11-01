@@ -1,0 +1,18 @@
+FOTOS DEL COMPARADOR "ANTES Y DESPUÉS"
+
+Guarda aquí dos fotos con estos nombres exactos:
+
+  antes    -> la clienta antes (por ejemplo, despeinada)
+  despues  -> la misma clienta después (peinada)
+
+  Valen en formato .jpg, .png o .webp (por ejemplo: despues.png).
+
+Consejos para que el efecto quede perfecto:
+- Misma pose, misma distancia y mismo encuadre en las dos fotos
+  (lo ideal es hacerlas desde el mismo sitio, con el móvil apoyado).
+- Misma luz (mismo lugar del salón, a la misma hora).
+- Foto en vertical, mejor de al menos 1000 px de ancho.
+- Pide permiso a la clienta para publicarla.
+
+En cuanto estén las dos, la web las usa automáticamente.
+Si falta alguna, se muestra la foto de ejemplo.

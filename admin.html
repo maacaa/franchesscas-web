@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Agenda · Franchessca's</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F1EA;
+    --sand: #EFE5DA;
+    --rose: #A85F4F;
+    --gold: #A85F4F;
+    --ink: #2E2420;
+    --ink-soft: #6E5F57;
+    --line: rgba(46, 36, 32, .14);
+    --ok: #4F7A5A;
+    --warn: #B07A2E;
+    --bad: #A14A3C;
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  [hidden] { display: none !important; }
+  body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.15; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+  .eyebrow { font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 11px 18px; font: inherit; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; transition: background .2s, color .2s; text-decoration: none; }
+  .btn:hover { background: var(--ink); color: var(--cream); }
+  .btn-dark { background: var(--rose); border-color: var(--rose); color: #fff; }
+  .btn-dark:hover { background: #8C4A3C; border-color: #8C4A3C; color: #fff; }
+  .btn-sm { padding: 8px 12px; font-size: 11px; letter-spacing: .12em; }
+  .btn-ok { border-color: var(--ok); color: var(--ok); } .btn-ok:hover { background: var(--ok); color: #fff; }
+  .btn-bad { border-color: var(--bad); color: var(--bad); } .btn-bad:hover { background: var(--bad); color: #fff; }
+  .btn:disabled { opacity: .5; cursor: wait; }
+  input, select, textarea { font: inherit; font-size: 16px; color: var(--ink); background: #FFFDFB; border: 1px solid rgba(31,26,23,.25); padding: 10px 12px; border-radius: 0; width: 100%; outline: none; }
+  input:focus, select:focus, textarea:focus { border-color: var(--ink); }
+  label { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); display: block; margin-bottom: 4px; }
+  .msg { font-size: 14px; color: var(--bad); min-height: 1.4em; margin-top: 10px; }
+
+  /* Login */
+  .login { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
+  .login-card { width: 100%; max-width: 380px; background: #FFFDFB; border: 1px solid var(--line); padding: 40px 28px; }
+  .login-card .logo { font-family: var(--serif); font-style: italic; font-size: 34px; text-align: center; }
+  .login-card p { text-align: center; color: var(--ink-soft); font-size: 14px; margin: 4px 0 28px; }
+  .login-card .field { margin-bottom: 16px; }
+  .login-card .btn { width: 100%; margin-top: 8px; }
+
+  /* App */
+  header { background: #231A16; color: var(--cream); position: sticky; top: 0; z-index: 10; }
+  .bar { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 12px; }
+  .bar .logo { font-family: var(--serif); font-style: italic; font-size: 24px; }
+  .bar .logo small { font-family: var(--sans); font-style: normal; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; opacity: .6; margin-left: 8px; }
+  .bar button { background: none; border: 0; color: var(--cream); font: inherit; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; opacity: .75; }
+  .bar button:hover { opacity: 1; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 24px 0; }
+  .stat { background: #FFFDFB; padding: 16px; }
+  .stat b { display: block; font-family: var(--serif); font-size: 34px; font-weight: 400; line-height: 1; }
+  .stat span { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+  .stat.pend b { color: var(--rose); }
+
+  .toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .tabs { display: flex; border: 1px solid var(--line); background: #FFFDFB; }
+  .tabs button { background: none; border: 0; font: inherit; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; padding: 10px 14px; cursor: pointer; color: var(--ink-soft); }
+  .tabs button.active { background: var(--rose); color: #fff; }
+  .tools { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .day { margin-bottom: 28px; }
+  .day h2 { font-size: 26px; text-transform: capitalize; padding-bottom: 8px; border-bottom: 1px solid var(--line); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: baseline; }
+  .day h2 small { font-family: var(--sans); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+  .appt { display: grid; grid-template-columns: 70px 1fr auto; gap: 16px; align-items: start; background: #FFFDFB; border: 1px solid var(--line); border-left: 3px solid var(--warn); padding: 16px; margin-bottom: 10px; }
+  .appt.confirmada { border-left-color: var(--ok); }
+  .appt.cancelada { border-left-color: var(--line); opacity: .55; }
+  .appt.blocked { border-left-color: var(--ink-soft); background: var(--sand); }
+  .appt .time { font-family: var(--serif); font-size: 26px; line-height: 1; }
+  .appt h3 { font-size: 21px; }
+  .appt .who { font-size: 15px; }
+  .appt .who a { color: var(--ink); }
+  .appt .notes { font-size: 14px; color: var(--ink-soft); font-style: italic; margin-top: 4px; }
+  .chip { display: inline-block; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; padding: 3px 8px; border: 1px solid currentColor; margin-bottom: 6px; }
+  .chip.pendiente { color: var(--warn); } .chip.confirmada { color: var(--ok); } .chip.cancelada { color: var(--ink-soft); }
+  .actions { display: flex; flex-direction: column; gap: 6px; min-width: 130px; }
+  .empty { text-align: center; padding: 60px 16px; color: var(--ink-soft); font-family: var(--serif); font-style: italic; font-size: 22px; }
+
+  dialog { border: 1px solid var(--line); background: var(--cream); padding: 28px 24px; width: min(440px, calc(100vw - 32px)); margin: auto; }
+  dialog::backdrop { background: rgba(31,26,23,.5); }
+  dialog h3 { font-size: 28px; margin-bottom: 18px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .dfield { margin-bottom: 14px; }
+  .dactions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
+  .check { display: flex; gap: 8px; align-items: center; font-size: 14px; text-transform: none; letter-spacing: 0; color: var(--ink); }
+  .check input { width: auto; }
+
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(120px); background: var(--ink); color: var(--cream); padding: 12px 20px; font-size: 14px; transition: transform .3s; z-index: 50; max-width: calc(100vw - 32px); }
+  .toast.show { transform: translateX(-50%); }
+  .setup { max-width: 560px; margin: 80px auto; padding: 32px 24px; background: #FFFDFB; border: 1px solid var(--line); }
+  .setup h1 { font-size: 32px; margin-bottom: 12px; }
+  .setup p { color: var(--ink-soft); margin-bottom: 10px; }
+  .setup code { background: var(--sand); padding: 1px 6px; font-size: 14px; }
+
+  @media (max-width: 640px) {
+    .appt { grid-template-columns: 56px 1fr; }
+    .actions { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; min-width: 0; }
+    .actions .btn { flex: 1; }
+    .bar .logo small { display: none; }
+    .stat b { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="setup" class="setup" hidden>
+  <span class="eyebrow">Configuración pendiente</span>
+  <h1>Falta conectar Supabase</h1>
+  <p>Escribe la <b>Project URL</b> de tu proyecto en el archivo <code>supabase-config.js</code> y recarga esta página.</p>
+</div>
+
+<!-- LOGIN -->
+<section id="login" class="login" hidden>
+  <form class="login-card" id="login-form">
+    <div class="logo">Franchessca's</div>
+    <p>Agenda del salón</p>
+    <div class="field"><label for="l-email">Email</label><input type="email" id="l-email" autocomplete="username" required></div>
+    <div class="field"><label for="l-pass">Contraseña</label><input type="password" id="l-pass" autocomplete="current-password" required></div>
+    <button class="btn btn-dark" type="submit">Entrar</button>
+    <div class="msg" id="login-msg"></div>
+  </form>
+</section>
+
+<!-- APP -->
+<div id="app" hidden>
+  <header>
+    <div class="wrap bar">
+      <div class="logo">Franchessca's<small>Agenda</small></div>
+      <button id="logout">Salir</button>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="stats">
+      <div class="stat pend"><b id="s-pend">–</b><span>Pendientes</span></div>
+      <div class="stat"><b id="s-today">–</b><span>Citas hoy</span></div>
+      <div class="stat"><b id="s-week">–</b><span>Próx. 7 días</span></div>
+    </div>
+    <div class="toolbar">
+      <div class="tabs" id="filter">
+        <button data-f="pendiente" class="active">Pendientes</button>
+        <button data-f="activas">Agenda</button>
+        <button data-f="todas">Todas</button>
+      </div>
+      <div class="tools">
+        <button class="btn btn-sm" id="btn-new">+ Cita</button>
+        <button class="btn btn-sm" id="btn-block">Bloquear</button>
+        <button class="btn btn-sm" id="btn-refresh" title="Actualizar">↻</button>
+      </div>
+    </div>
+    <div id="list"></div>
+  </main>
+</div>
+
+<!-- Diálogo: nueva cita / cambiar hora -->
+<dialog id="dlg-appt">
+  <form method="dialog" id="appt-form">
+    <h3 id="appt-title">Nueva cita</h3>
+    <div class="dfield new-only"><label for="a-service">Servicio</label><select id="a-service"></select></div>
+    <div class="grid2">
+      <div class="dfield"><label for="a-date">Fecha</label><input type="date" id="a-date" required></div>
+      <div class="dfield"><label for="a-time">Hora</label><select id="a-time" required></select></div>
+    </div>
+    <div class="grid2 new-only">
+      <div class="dfield"><label for="a-name">Nombre</label><input id="a-name"></div>
+      <div class="dfield"><label for="a-phone">Teléfono</label><input id="a-phone" type="tel"></div>
+    </div>
+    <div class="dfield new-only"><label for="a-notes">Notas</label><input id="a-notes"></div>
+    <div class="msg" id="appt-msg"></div>
+    <div class="dactions">
+      <button class="btn btn-sm" value="cancel" formnovalidate>Cerrar</button>
+      <button class="btn btn-sm btn-dark" id="appt-save" value="ok">Guardar</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Diálogo: bloquear -->
+<dialog id="dlg-block">
+  <form method="dialog" id="block-form">
+    <h3>Bloquear horario</h3>
+    <div class="grid2">
+      <div class="dfield"><label for="b-date">Fecha</label><input type="date" id="b-date" required></div>
+      <div class="dfield"><label for="b-time">Hora</label><select id="b-time"></select></div>
+    </div>
+    <div class="dfield"><label class="check"><input type="checkbox" id="b-all"> Día completo (vacaciones, festivo…)</label></div>
+    <div class="dfield"><label for="b-reason">Motivo (opcional)</label><input id="b-reason" placeholder="Médico, formación…"></div>
+    <div class="msg" id="block-msg"></div>
+    <div class="dactions">
+      <button class="btn btn-sm" value="cancel" formnovalidate>Cerrar</button>
+      <button class="btn btn-sm btn-dark" value="ok">Bloquear</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/dist/umd/supabase.min.js"></script>
+<script src="supabase-config.js"></script>
+<script>
+  const ADDRESS = 'Carrer de Joan Baptista Basset i Ramos, 20, El Campello';
+  const SERVICES = ['Corte, lavado y peinado', 'Corte de puntas / sanear', 'Corte de flequillo', 'Lavado y peinado', 'Peinado con ondas', 'Cambio de look',
+    'Corte infantil (niñas)', 'Asesoramiento personalizado', 'Tinte de raíz', 'Tinte completo', 'Mechas', 'Balayage', 'Babylights', 'Baño de color / matiz',
+    'Decoloración', 'Corrección de color', "Ritual Franchessca's", 'Hidratación profunda', 'Reconstrucción capilar', 'Alisado de keratina', 'Botox capilar',
+    'Tratamiento anticaída', 'Tratamiento de cuero cabelludo', 'Permanente / ondulación', 'Recogido de novia', 'Prueba de novia', 'Recogido de invitada',
+    'Semirecogido', 'Trenzas', 'Peinado de fiesta', 'Peinado de comunión', 'Servicio a domicilio'];
+
+  const $ = id => document.getElementById(id);
+  const pad = n => String(n).padStart(2, '0');
+  const iso = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const todayISO = iso(new Date());
+  const SLOTS = []; for (let m = 8 * 60; m <= 13 * 60 + 30; m += 30) SLOTS.push(`${pad(Math.floor(m / 60))}:${pad(m % 60)}`);
+  const fmtDay = d => new Date(d + 'T00:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const toast = t => { const el = $('toast'); el.textContent = t; el.classList.add('show'); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 3200); };
+  const waLink = (phone, text) => {
+    let n = String(phone).replace(/\D/g, '');
+    if (n.length === 9) n = '34' + n;
+    return `https://wa.me/${n}?text=${encodeURIComponent(text)}`;
+  };
+
+  if (!window.SUPABASE_URL || !window.supabase) { $('setup').hidden = false; throw new Error('Supabase sin configurar'); }
+  const db = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_KEY);
+
+  /* ---------- Sesión ---------- */
+  const showApp = async session => {
+    if (!session) { $('login').hidden = false; $('app').hidden = true; return; }
+    const { data: isAdmin } = await db.rpc('is_admin');
+    if (!isAdmin) {
+      await db.auth.signOut();
+      $('login-msg').textContent = 'Esta cuenta no tiene acceso a la agenda.';
+      $('login').hidden = false; $('app').hidden = true; return;
+    }
+    $('login').hidden = true; $('app').hidden = false;
+    load();
+  };
+  $('login-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    $('login-msg').textContent = '';
+    const { data, error } = await db.auth.signInWithPassword({ email: $('l-email').value.trim(), password: $('l-pass').value });
+    if (error) { $('login-msg').textContent = 'Email o contraseña incorrectos.'; return; }
+    showApp(data.session);
+  });
+  $('logout').onclick = async () => { await db.auth.signOut(); location.reload(); };
+  db.auth.getSession().then(({ data }) => showApp(data.session));
+
+  /* ---------- Agenda ---------- */
+  let filter = 'pendiente', appts = [], blocks = [];
+  $('filter').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    filter = b.dataset.f;
+    [...$('filter').children].forEach(x => x.classList.toggle('active', x === b));
+    render();
+  });
+
+  async function load() {
+    const [a, b] = await Promise.all([
+      db.from('appointments').select('*').gte('date', todayISO).order('date').order('time'),
+      db.from('blocked_slots').select('*').gte('date', todayISO).order('date').order('time', { nullsFirst: true })
+    ]);
+    if (a.error || b.error) { toast('No se pudo cargar la agenda.'); return; }
+    appts = a.data; blocks = b.data;
+    const in7 = iso(new Date(Date.now() + 7 * 864e5));
+    $('s-pend').textContent = appts.filter(x => x.status === 'pendiente').length;
+    $('s-today').textContent = appts.filter(x => x.date === todayISO && x.status !== 'cancelada').length;
+    $('s-week').textContent = appts.filter(x => x.date <= in7 && x.status !== 'cancelada').length;
+    render();
+  }
+
+  function render() {
+    const rows = appts.filter(x => filter === 'todas' || (filter === 'pendiente' ? x.status === 'pendiente' : x.status !== 'cancelada'))
+      .map(x => ({ ...x, kind: 'appt' }));
+    if (filter !== 'pendiente') rows.push(...blocks.map(x => ({ ...x, kind: 'block' })));
+    if (!rows.length) {
+      $('list').innerHTML = `<div class="empty">${filter === 'pendiente' ? 'No hay solicitudes pendientes ✦' : 'No hay citas próximas'}</div>`;
+      return;
+    }
+    rows.sort((p, q) => (p.date + (p.time || '00')).localeCompare(q.date + (q.time || '00')));
+    const byDay = {};
+    rows.forEach(r => (byDay[r.date] ||= []).push(r));
+    $('list').innerHTML = Object.entries(byDay).map(([d, items]) => `
+      <div class="day">
+        <h2>${d === todayISO ? 'Hoy · ' : ''}${fmtDay(d)}<small>${items.filter(i => i.kind === 'appt').length} citas</small></h2>
+        ${items.map(r => r.kind === 'block' ? `
+          <div class="appt blocked">
+            <div class="time">${r.time ? r.time.slice(0, 5) : '—'}</div>
+            <div><span class="chip cancelada">Bloqueado</span><h3>${r.time ? 'Hora bloqueada' : 'Día completo cerrado'}</h3>${r.reason ? `<div class="notes">${esc(r.reason)}</div>` : ''}</div>
+            <div class="actions"><button class="btn btn-sm" data-act="unblock" data-id="${r.id}">Desbloquear</button></div>
+          </div>` : `
+          <div class="appt ${r.status}">
+            <div class="time">${r.time.slice(0, 5)}</div>
+            <div>
+              <span class="chip ${r.status}">${r.status}</span>
+              <h3>${esc(r.service)}</h3>
+              <div class="who">${esc(r.name)} · <a href="tel:${esc(r.phone)}">${esc(r.phone)}</a></div>
+              ${r.notes ? `<div class="notes">“${esc(r.notes)}”</div>` : ''}
+            </div>
+            <div class="actions">
+              ${r.status === 'pendiente' ? `<button class="btn btn-sm btn-ok" data-act="confirm" data-id="${r.id}">Confirmar</button>` : ''}
+              ${r.status !== 'cancelada' ? `<button class="btn btn-sm" data-act="move" data-id="${r.id}">Cambiar hora</button>
+              <button class="btn btn-sm btn-bad" data-act="cancel" data-id="${r.id}">Cancelar</button>` : ''}
+              ${r.status === 'confirmada' ? `<a class="btn btn-sm" target="_blank" rel="noopener" href="${waLink(r.phone, `Hola ${r.name}, te recordamos tu cita en Franchessca's el ${fmtDay(r.date)} a las ${r.time.slice(0, 5)}. ¡Te esperamos!`)}">Recordar</a>` : ''}
+            </div>
+          </div>`).join('')}
+      </div>`).join('');
+  }
+
+  // Abrimos WhatsApp antes del await para que el navegador no bloquee la ventana
+  $('list').addEventListener('click', async e => {
+    const b = e.target.closest('button[data-act]'); if (!b) return;
+    const id = b.dataset.id, act = b.dataset.act;
+    if (act === 'unblock') {
+      const { error } = await db.from('blocked_slots').delete().eq('id', id);
+      toast(error ? 'No se pudo desbloquear.' : 'Horario desbloqueado.'); load(); return;
+    }
+    const r = appts.find(x => x.id === id);
+    const when = `el ${fmtDay(r.date)} a las ${r.time.slice(0, 5)}`;
+    if (act === 'confirm') {
+      const w = window.open(waLink(r.phone, `Hola ${r.name}, te confirmamos tu cita en Franchessca's para ${r.service} ${when}. Te esperamos en ${ADDRESS}. ¡Gracias!`), '_blank');
+      b.disabled = true;
+      const { error } = await db.from('appointments').update({ status: 'confirmada' }).eq('id', id);
+      if (error) { w && w.close(); toast('No se pudo confirmar.'); b.disabled = false; return; }
+      toast('Cita confirmada. Envía el WhatsApp a la clienta.'); load();
+    }
+    if (act === 'cancel') {
+      if (!confirm(`¿Cancelar la cita de ${r.name} ${when}?`)) return;
+      const w = window.open(waLink(r.phone, `Hola ${r.name}, sentimos comunicarte que tenemos que anular tu cita en Franchessca's ${when}. Escríbenos y te buscamos otro hueco.`), '_blank');
+      const { error } = await db.from('appointments').update({ status: 'cancelada' }).eq('id', id);
+      if (error) { w && w.close(); toast('No se pudo cancelar.'); return; }
+      toast('Cita cancelada.'); load();
+    }
+    if (act === 'move') openAppt(r);
+  });
+
+  /* ---------- Diálogo de cita (nueva o cambiar hora) ---------- */
+  let editing = null;
+  $('a-service').innerHTML = SERVICES.map(s => `<option>${esc(s)}</option>`).join('');
+  const fillTimes = (sel, selected) => { sel.innerHTML = SLOTS.map(s => `<option ${s === selected ? 'selected' : ''}>${s}</option>`).join(''); };
+  [$('a-date'), $('b-date')].forEach(el => el.min = todayISO);
+
+  function openAppt(r) {
+    editing = r || null;
+    $('appt-title').textContent = r ? `Cambiar hora · ${r.name}` : 'Nueva cita';
+    document.querySelectorAll('#dlg-appt .new-only').forEach(el => el.hidden = !!r);
+    $('a-date').value = r ? r.date : todayISO;
+    fillTimes($('a-time'), r ? r.time.slice(0, 5) : SLOTS[0]);
+    ['a-name', 'a-phone', 'a-notes'].forEach(k => $(k).value = '');
+    $('appt-msg').textContent = '';
+    $('dlg-appt').showModal();
+  }
+  $('btn-new').onclick = () => openAppt(null);
+  $('appt-form').addEventListener('submit', async e => {
+    if (e.submitter?.value !== 'ok') return;
+    e.preventDefault();
+    const date = $('a-date').value, time = $('a-time').value;
+    const day = new Date(date + 'T00:00').getDay();
+    if (day % 6 === 0 && !confirm('Es fin de semana. ¿Guardar igualmente?')) return;
+    let res, w;
+    if (editing) {
+      w = window.open(waLink(editing.phone, `Hola ${editing.name}, te proponemos cambiar tu cita en Franchessca's al ${fmtDay(date)} a las ${time}. ¿Te viene bien? Responde a este mensaje para confirmarlo.`), '_blank');
+      res = await db.from('appointments').update({ date, time, status: 'confirmada' }).eq('id', editing.id);
+    } else {
+      if (!$('a-name').value.trim()) { $('appt-msg').textContent = 'Indica el nombre.'; return; }
+      res = await db.from('appointments').insert({ service: $('a-service').value, date, time, name: $('a-name').value.trim(),
+        phone: $('a-phone').value.trim() || '-', notes: $('a-notes').value.trim() || null, status: 'confirmada' });
+    }
+    if (res.error) {
+      w && w.close();
+      $('appt-msg').textContent = res.error.code === '23505' ? 'Ya hay una cita a esa hora.' : 'No se pudo guardar.';
+      return;
+    }
+    $('dlg-appt').close();
+    toast(editing ? 'Hora cambiada. Envía el WhatsApp a la clienta.' : 'Cita añadida.');
+    load();
+  });
+
+  /* ---------- Bloquear horario ---------- */
+  $('btn-block').onclick = () => {
+    $('b-date').value = todayISO; fillTimes($('b-time')); $('b-all').checked = false; $('b-time').disabled = false;
+    $('b-reason').value = ''; $('block-msg').textContent = '';
+    $('dlg-block').showModal();
+  };
+  $('b-all').onchange = () => $('b-time').disabled = $('b-all').checked;
+  $('block-form').addEventListener('submit', async e => {
+    if (e.submitter?.value !== 'ok') return;
+    e.preventDefault();
+    const { error } = await db.from('blocked_slots').insert({ date: $('b-date').value, time: $('b-all').checked ? null : $('b-time').value, reason: $('b-reason').value.trim() || null });
+    if (error) { $('block-msg').textContent = 'No se pudo bloquear.'; return; }
+    $('dlg-block').close(); toast('Horario bloqueado.'); load();
+  });
+
+  $('btn-refresh').onclick = load;
+  setInterval(() => { if (!$('app').hidden && !document.querySelector('dialog[open]')) load(); }, 60000);
+</script>
+</body>
+</html>

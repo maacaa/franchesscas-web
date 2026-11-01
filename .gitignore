@@ -1,0 +1,13 @@
+# Copias de seguridad de diseños anteriores (el historial de Git ya las guarda)
+versiones/
+
+# Configuración local del editor / vista previa
+.claude/
+
+# Capturas de pruebas que no usa la web
+Gemini_Generated_Image_*.jpg
+{*}.png
+
+# Sistema
+Thumbs.db
+.DS_Store
